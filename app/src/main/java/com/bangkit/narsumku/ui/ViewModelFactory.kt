@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bangkit.narsumku.data.UserRepository
 import com.bangkit.narsumku.di.Injection
 import com.bangkit.narsumku.ui.detail.SpeakerDetailViewModel
+import com.bangkit.narsumku.ui.favorite.FavoriteViewModel
 import com.bangkit.narsumku.ui.fragment.HomeViewModel
 import com.bangkit.narsumku.ui.login.LoginViewModel
 import com.bangkit.narsumku.ui.main.MainViewModel
@@ -17,6 +18,10 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
+            modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
+                FavoriteViewModel(repository) as T
+            }
+
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(repository) as T
             }

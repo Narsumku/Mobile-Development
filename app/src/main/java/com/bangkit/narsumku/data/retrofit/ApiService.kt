@@ -1,14 +1,19 @@
 package com.bangkit.narsumku.data.retrofit
 
+import com.bangkit.narsumku.data.request.AddFavoriteRequest
+import com.bangkit.narsumku.data.request.DeleteFavoriteRequest
 import com.bangkit.narsumku.data.request.LoginRequest
 import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.request.SignupRequest
+import com.bangkit.narsumku.data.response.AddFavoriteResponse
+import com.bangkit.narsumku.data.response.DeleteFavoriteResponse
 import com.bangkit.narsumku.data.response.PopularSpeaker
 import com.bangkit.narsumku.data.response.RecommendationSpeaker
 import com.bangkit.narsumku.data.response.Speaker
 import com.bangkit.narsumku.data.response.SignupResponse
 import com.bangkit.narsumku.data.response.SpeakerDetailResponse
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -41,4 +46,14 @@ interface ApiService {
 
     @GET("recommendations")
     suspend fun getHomeForRecommendation(): List<RecommendationSpeaker>
+
+    @POST("favorites")
+    suspend fun addFavorite(
+        @Body addFavoriteRequest: AddFavoriteRequest
+    ): AddFavoriteResponse
+
+    @DELETE("favorites")
+    suspend fun deleteFavorite(
+        @Body deleteFavoriteRequest: DeleteFavoriteRequest
+    ): DeleteFavoriteResponse
 }

@@ -3,10 +3,14 @@ package com.bangkit.narsumku.data
 import android.util.Log
 import com.bangkit.narsumku.data.pref.UserModel
 import com.bangkit.narsumku.data.pref.UserPreference
+import com.bangkit.narsumku.data.request.AddFavoriteRequest
+import com.bangkit.narsumku.data.request.DeleteFavoriteRequest
 import com.bangkit.narsumku.data.response.ErrorResponse
 import com.bangkit.narsumku.data.request.LoginRequest
 import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.request.SignupRequest
+import com.bangkit.narsumku.data.response.AddFavoriteResponse
+import com.bangkit.narsumku.data.response.DeleteFavoriteResponse
 import com.bangkit.narsumku.data.response.PopularSpeaker
 import com.bangkit.narsumku.data.response.RecommendationSpeaker
 import com.bangkit.narsumku.data.response.SignupResponse
@@ -65,6 +69,7 @@ class UserRepository private constructor(
                 val session = client.loginResult?.let {
                     UserModel(
                         email = email,
+                        userId = it.userId,
                         token = it.token,
                         isLogin = true
                     )
@@ -136,6 +141,35 @@ class UserRepository private constructor(
             Results.Error(errorMessage.toString())
         } catch (e: Exception) {
             Log.e("UserRepository", "Exception: ${e.localizedMessage}")
+            Results.Error(e.localizedMessage ?: "Unknown error")
+        }
+    }
+
+    suspend fun addFavorite(userId: String, speakerId: String): Results<AddFavoriteResponse> {
+        return try {
+            val client = AddFavoriteRequest(userId, speakerId)
+            val response = apiService.addFavorite(client)
+            Results.Success(response)
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            Results.Error(errorMessage.toString())
+        } catch (e: Exception) {
+            Results.Error(e.localizedMessage ?: "Unknown error")
+        }
+    }
+
+    suspend fun deleteFavorite(userId: String, speakerId: String): Results<DeleteFavoriteResponse> {
+        return try {
+            val response = apiService.deleteFavorite(userId, speakerId)
+            Results.Success(response)
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            Results.Error(errorMessage.toString())
+        } catch (e: Exception) {
             Results.Error(e.localizedMessage ?: "Unknown error")
         }
     }
