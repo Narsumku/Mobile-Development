@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.narsumku.data.response.PopularSpeaker
 import com.bangkit.narsumku.databinding.ItemPopularSpeakerBinding
+import com.bumptech.glide.Glide
 
 class PopularSpeakerAdapter(
     private val speakers: List<PopularSpeaker>,
@@ -17,6 +18,9 @@ class PopularSpeakerAdapter(
 
     inner class PopularViewHolder(private val binding: ItemPopularSpeakerBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(speaker: PopularSpeaker) {
+            Glide.with(binding.root.context)
+                .load(speaker.profilePicUrl)
+                .into(binding.ivSpeakerPhoto)
             binding.tvSpeakerName.text = speaker.fullName
             binding.tvSpeakerRating.text = speaker.rating.toString()
             binding.tvSpeakerExperience.text = speaker.experience

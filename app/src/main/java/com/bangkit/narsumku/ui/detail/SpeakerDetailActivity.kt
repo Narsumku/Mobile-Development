@@ -1,10 +1,12 @@
 package com.bangkit.narsumku.ui.detail
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
 import com.bangkit.narsumku.data.Results
+import com.bangkit.narsumku.data.response.SpeakerDetailResponse
 import com.bangkit.narsumku.databinding.ActivitySpeakerDetailBinding
 import com.bangkit.narsumku.ui.ViewModelFactory
 import com.bumptech.glide.Glide
@@ -33,24 +35,28 @@ class SpeakerDetailActivity : AppCompatActivity() {
                 is Results.Success -> {
                     // Tampilkan data speaker
                     val speaker = result.data
-                    val speakerRating = speaker.recentExperience
-                    val quality = when {
-                        speakerRating < 2 -> "Bad"
-                        speakerRating in 2..3 -> "Medium"
-                        speakerRating > 3 -> "Good"
-                        else -> "Unknown"
-                    }
                     binding.progressBar.visibility = View.GONE
                     Glide.with(binding.root.context)
                         .load(speaker.profilePicUrl)
                         .into(binding.ivSpeakerAvatar)
                     binding.tvSpeakerName.text = speaker.fullName
-                    binding.tvStars.text = speakerRating.toString()
-                    binding.tvQuality.text = quality
-                    binding.tvSpeakerExperience.text = speaker.experience
-                    binding.tvCategory1.text = speaker.category1
-                    binding.tvCategory2.text = speaker.category2
-                    binding.tvCategory3.text = speaker.category3
+                    binding.tvOccupation.text = speaker.occupation
+                    binding.tvEmail.text = speaker.email
+                    binding.tvHeadline.text = speaker.headline
+                    if(speaker.summary != null) {
+                        binding.tvSummary.text = speaker.summary
+                    } else {
+                        binding.tvSummary.text = "Summary for this speaker is not set yet"
+                    }
+                    binding.tvRecent.text = speaker.recentExperience.toString()
+                    binding.tvExperience.text = speaker.experience
+                    val category1 = speaker.category1
+                    val category2 = speaker.category2
+                    val category3 = speaker.category3
+
+
+                    binding.tvCategory.text = listOfNotNull(category1, category2, category3).joinToString("\n")
+                    setupShareButton(speaker)
                 }
 
                 is Results.Error -> {
@@ -61,5 +67,27 @@ class SpeakerDetailActivity : AppCompatActivity() {
         }
 
         viewModel.getSpeakerDetail(speakerId)
+    }
+
+    private fun setupShareButton(speaker: SpeakerDetailResponse) {
+        binding.btnShare.setOnClickListener {
+            val shareText = """
+                Speaker: ${speaker.fullName}
+                Occupation: ${speaker.occupation}
+                Email: ${speaker.email}
+                Headline: ${speaker.headline}
+                Summary: ${speaker.summary ?: "Not set"}
+                Recent Experience: ${speaker.recentExperience}
+                Experience: ${speaker.experience}
+                Categories: ${listOfNotNull(speaker.category1, speaker.category2, speaker.category3).joinToString("\n")}
+            """.trimIndent()
+
+            val shareIntent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, shareText)
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(shareIntent, "Share Speaker Details via"))
+        }
     }
 }

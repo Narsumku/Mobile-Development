@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.narsumku.data.response.SearchResponse
 import com.bangkit.narsumku.data.response.Speaker
 import com.bangkit.narsumku.databinding.ItemSpeakerBinding
+import com.bumptech.glide.Glide
 
 class SearchAdapter(
     private val speakers: List<Speaker>,
@@ -19,6 +20,9 @@ class SearchAdapter(
 
     inner class SearchViewHolder(private val binding: ItemSpeakerBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(speaker: Speaker) {
+            Glide.with(binding.root.context)
+                .load(speaker.profilePicUrl)
+                .into(binding.ivSpeakerPhoto)
             binding.tvSpeakerName.text = speaker.name
             if(speaker.field == "Media_News") {
                 binding.tvSpeakerField.text = "Media & News"

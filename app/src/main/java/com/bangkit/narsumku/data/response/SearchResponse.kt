@@ -13,6 +13,9 @@ data class Speaker(
     @field:SerializedName("speaker_id")
     val speakerId: String,
 
+    @field:SerializedName("profile_pic_url")
+    val profilePicUrl: String,
+
     @field:SerializedName("name")
     val name: String,
 

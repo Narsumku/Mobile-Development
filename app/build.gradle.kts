@@ -16,6 +16,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
 
         buildConfigField("String", "BASE_URL", "\"https://narsumku2-6bik6gmhaa-et.a.run.app/\"")
         buildConfigField("String", "AUTH_HEADER", "\"Authorization\"")

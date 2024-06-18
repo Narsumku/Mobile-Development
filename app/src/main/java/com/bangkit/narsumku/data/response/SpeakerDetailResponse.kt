@@ -22,21 +22,21 @@ data class SpeakerDetailResponse(
     @field:SerializedName("summary")
     val summary: String,
 
-    @field:SerializedName("recent_experience")
+    @field:SerializedName("1st Recent Experience")
     val recentExperience: Int,
 
-    @field:SerializedName("experience")
+    @field:SerializedName("Experience")
     val experience: String,
 
-    @field:SerializedName("email")
+    @field:SerializedName("Email")
     val email: String,
 
-    @field:SerializedName("category1")
+    @field:SerializedName("Category_1")
     val category1: String,
 
-    @field:SerializedName("category2")
+    @field:SerializedName("Category_2")
     val category2: String,
 
-    @field:SerializedName("category3")
+    @field:SerializedName("Category_3")
     val category3: String
 )

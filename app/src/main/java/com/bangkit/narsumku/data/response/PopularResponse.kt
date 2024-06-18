@@ -7,6 +7,9 @@ data class PopularSpeaker(
     @field:SerializedName("speaker_id")
     val speakerId: String,
 
+    @field:SerializedName("profile_pic_url")
+    val profilePicUrl: String,
+
     @field:SerializedName("Full Name")
     val fullName: String,
 

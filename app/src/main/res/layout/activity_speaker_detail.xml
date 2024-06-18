@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
     tools:context=".ui.detail.SpeakerDetailActivity">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -18,10 +23,13 @@
 
     <TextView
         android:id="@+id/tvSpeakerName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:textColor="@color/blue"
+        android:textAlignment="center"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/ivSpeakerAvatar"
@@ -31,49 +39,64 @@
         tools:text="Speaker Name" />
 
     <TextView
-        android:id="@+id/tvSpeakerField"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvOccupation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Speaker Field"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        tools:text="Occupation"
+        android:textAlignment="center"
         android:textColor="@color/blue"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/tvSpeakerName"
-        app:layout_constraintStart_toStartOf="@+id/tvSpeakerName"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSpeakerName" />
+
+    <TextView
+        android:id="@+id/tvEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        tools:text="email@email.com"
+        android:textColor="@color/regular_blue"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvOccupation" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
+        android:layout_margin="16dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:orientation="horizontal"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvSpeakerField">
+        app:layout_constraintTop_toBottomOf="@id/tvEmail">
 
-        <TextView
-            android:id="@+id/tvStars"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="16dp"
-            android:textSize="14sp"
-            app:drawableStartCompat="@drawable/ic_stars"
-            tools:ignore="TextContrastCheck"
-            tools:text="\?\?\? Stars" />
+        <ImageView
+            android:id="@+id/btnFavorite"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_favorite"/>
 
-        <TextView
-            android:id="@+id/tvQuality"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textSize="14sp"
-            app:drawableStartCompat="@drawable/ic_quality"
-            tools:ignore="TextContrastCheck"
-            tools:text="\?\?\? Quality" />
+        <ImageView
+            android:id="@+id/btnShare"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_share"/>
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintHeadline"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -85,102 +108,177 @@
         app:layout_constraintVertical_bias="0">
 
         <TextView
-            android:id="@+id/tvExperience"
+            android:id="@+id/tvHeadline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:fontFamily="@font/leaguespartan"
-            android:justificationMode="inter_word"
             android:textColor="@color/blue"
-            android:textSize="16sp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="TextContrastCheck"
+            android:text="Headline" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintSummary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/round_gray_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintHeadline"
+        app:layout_constraintVertical_bias="0">
+
+        <TextView
+            android:id="@+id/tvSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/leaguespartan"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="TextContrastCheck"
+            android:text="Summary" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintRecent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/round_gray_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintSummary">
+
+        <TextView
+            android:id="@+id/tvRecentHead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/leaguespartan"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="TextContrastCheck"
-            android:text="Experience:" />
+            android:text="Recent Experience:" />
 
         <TextView
-            android:id="@+id/tvSpeakerExperience"
+            android:id="@+id/tvRecent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="20sp"
             android:fontFamily="@font/leaguespartan"
-            android:justificationMode="inter_word"
             android:textColor="@color/blue"
             android:textSize="16sp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvExperience"
+            app:layout_constraintTop_toBottomOf="@id/tvRecentHead"
             tools:ignore="TextContrastCheck"
-            tools:text="year" />
+            android:text="Recent Experience" />
 
         <TextView
-            android:id="@+id/tvField"
+            android:id="@+id/tvExperienceHead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:fontFamily="@font/leaguespartan"
-            android:justificationMode="inter_word"
             android:textColor="@color/blue"
-            android:textSize="16sp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvSpeakerExperience"
+            app:layout_constraintTop_toBottomOf="@id/tvRecent"
             tools:ignore="TextContrastCheck"
-            android:text="Field:" />
+            android:text="Experience:" />
 
         <TextView
-            android:id="@+id/tvCategory1"
+            android:id="@+id/tvExperience"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/leaguespartan"
-            android:justificationMode="inter_word"
             android:textColor="@color/blue"
-            android:textSize="16sp"
+            android:textSize="20sp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvField"
+            app:layout_constraintTop_toBottomOf="@id/tvExperienceHead"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="TextContrastCheck"
-            tools:text="field" />
+            android:text="Experience" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintCategory"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/round_gray_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/constraintRecent"
+        app:layout_constraintVertical_bias="0">
 
         <TextView
-            android:id="@+id/tvCategory2"
+            android:id="@+id/tvCategoryHead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_margin="16dp"
             android:fontFamily="@font/leaguespartan"
-            android:justificationMode="inter_word"
             android:textColor="@color/blue"
-            android:textSize="16sp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCategory1"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="TextContrastCheck"
-            tools:text="field" />
+            android:text="Category:" />
 
         <TextView
-            android:id="@+id/tvCategory3"
+            android:id="@+id/tvCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/leaguespartan"
-            android:justificationMode="inter_word"
             android:textColor="@color/blue"
-            android:textSize="16sp"
+            android:textSize="20sp"
+            android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCategory2"
+            app:layout_constraintTop_toBottomOf="@id/tvCategoryHead"
+            app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="TextContrastCheck"
-            tools:text="field" />
+            android:text="{$category1\n$category2\ncategory3}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -192,48 +290,11 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.085"
+        app:layout_constraintVertical_bias="0.13"
         tools:visibility="visible" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_favorite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:foregroundGravity="bottom"
-        app:fabSize="normal"
-        app:layout_anchorGravity="bottom|end"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_favorite"
-        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_share"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:foregroundGravity="bottom"
-        app:fabSize="normal"
-        app:layout_anchorGravity="bottom|end"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.135"
-        app:srcCompat="@drawable/ic_share"
-        tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
