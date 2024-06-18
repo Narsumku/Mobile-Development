@@ -8,10 +8,10 @@ import com.bangkit.narsumku.data.request.LoginRequest
 import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.request.SignupRequest
 import com.bangkit.narsumku.data.response.PopularSpeaker
+import com.bangkit.narsumku.data.response.RecommendationSpeaker
 import com.bangkit.narsumku.data.response.SignupResponse
 import com.bangkit.narsumku.data.response.Speaker
 import com.bangkit.narsumku.data.response.SpeakerDetailResponse
-import com.bangkit.narsumku.data.response.SpeakerResponse
 import com.bangkit.narsumku.data.retrofit.ApiConfig
 import com.bangkit.narsumku.data.retrofit.ApiService
 import com.google.gson.Gson
@@ -83,26 +83,6 @@ class UserRepository private constructor(
         }
     }
 
-    suspend fun getSpeakers(): Results<SpeakerResponse> {
-        Results.Loading
-        return try {
-            val client = apiService.getAllSpeakers()
-
-            if (client.error) {
-                Results.Error(client.message)
-            } else {
-                Results.Success(client)
-            }
-        } catch (e: HttpException) {
-            val jsonInString = e.response()?.errorBody()?.string()
-            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
-            val errorMessage = errorBody.message
-            Results.Error(errorMessage.toString())
-        } catch (e: Exception) {
-            Results.Error(e.localizedMessage ?: "Unknown error")
-        }
-    }
-
     suspend fun getSearch(field: String): Results<List<Speaker>> {
         return try {
             val response = apiService.getSearch(field)
@@ -126,9 +106,26 @@ class UserRepository private constructor(
         }
     }
 
-    suspend fun getHome(): Results<List<PopularSpeaker>> {
+    suspend fun getHomeForPopular(): Results<List<PopularSpeaker>> {
         return try {
             val response = apiService.getHomeForPopular()
+            Log.d("UserRepository", "Home Response: ${Gson().toJson(response)}")
+            Results.Success(response)
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            Log.e("UserRepository", "HTTP Exception: $errorMessage")
+            Results.Error(errorMessage.toString())
+        } catch (e: Exception) {
+            Log.e("UserRepository", "Exception: ${e.localizedMessage}")
+            Results.Error(e.localizedMessage ?: "Unknown error")
+        }
+    }
+
+    suspend fun getHomeForRecommendation(): Results<List<RecommendationSpeaker>> {
+        return try {
+            val response = apiService.getHomeForRecommendation()
             Log.d("UserRepository", "Home Response: ${Gson().toJson(response)}")
             Results.Success(response)
         } catch (e: HttpException) {

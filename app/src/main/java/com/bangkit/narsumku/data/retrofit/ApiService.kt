@@ -4,10 +4,10 @@ import com.bangkit.narsumku.data.request.LoginRequest
 import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.request.SignupRequest
 import com.bangkit.narsumku.data.response.PopularSpeaker
+import com.bangkit.narsumku.data.response.RecommendationSpeaker
 import com.bangkit.narsumku.data.response.Speaker
 import com.bangkit.narsumku.data.response.SignupResponse
 import com.bangkit.narsumku.data.response.SpeakerDetailResponse
-import com.bangkit.narsumku.data.response.SpeakerResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -26,9 +26,6 @@ interface ApiService {
         @Body loginRequest: LoginRequest
     ): LoginResponse
 
-    @GET("users")
-    suspend fun getAllSpeakers(): SpeakerResponse
-
     @GET("search")
     suspend fun getSearch(
         @Query("keyword") field: String
@@ -41,4 +38,7 @@ interface ApiService {
 
     @GET("popular")
     suspend fun getHomeForPopular(): List<PopularSpeaker>
+
+    @GET("recommendations")
+    suspend fun getHomeForRecommendation(): List<RecommendationSpeaker>
 }

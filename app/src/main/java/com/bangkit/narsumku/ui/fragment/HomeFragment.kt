@@ -15,7 +15,7 @@ import com.bangkit.narsumku.data.response.PopularSpeaker
 import com.bangkit.narsumku.databinding.FragmentHomeBinding
 import com.bangkit.narsumku.ui.ViewModelFactory
 import com.bangkit.narsumku.ui.adapter.PopularSpeakerAdapter
-import com.bangkit.narsumku.ui.adapter.SearchAdapter
+import com.bangkit.narsumku.ui.adapter.RecommendationSpeakerAdapter
 import com.bangkit.narsumku.ui.detail.SpeakerDetailActivity
 import kotlinx.coroutines.launch
 
@@ -35,7 +35,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
-            observeHomeResponse()
+            observePopularResponse()
+            observeRecommendationResponse()
         }
         setupRecyclerViews()
     }
@@ -45,7 +46,7 @@ class HomeFragment : Fragment() {
         binding.recyclerViewRecommendedSpeakers.layoutManager = LinearLayoutManager(context)
     }
 
-    private suspend fun observeHomeResponse() {
+    private suspend fun observePopularResponse() {
         when (val popular = homeViewModel.getHomeForPopular()) {
             is Results.Loading -> {
                 Log.d("SearchActivity", "Loading data...") // Log loading state
@@ -68,13 +69,27 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupPopularSpeakerRecyclerView(speakers: List<PopularSpeaker>) {
-        val adapter = PopularSpeakerAdapter(speakers, object : PopularSpeakerAdapter.OnItemClickListener {
-            override fun onItemClick(speakerId: String) {
-                openSpeakerDetail(speakerId)
+    private suspend fun observeRecommendationResponse() {
+        when (val recommendation = homeViewModel.getHomeForRecommendation()) {
+            is Results.Loading -> {
+                Log.d("SearchActivity", "Loading data...") // Log loading state
+                binding.progressBar.visibility = View.VISIBLE
             }
-        })
-        binding.recyclerViewPopularSpeakers.adapter = adapter
+            is Results.Success -> {
+                Log.d("SearchActivity", "Data loaded successfully") // Log success state
+                binding.progressBar.visibility = View.GONE
+                val adapter = RecommendationSpeakerAdapter(recommendation.data, object : RecommendationSpeakerAdapter.OnItemClickListener {
+                    override fun onItemClick(speakerId: String) {
+                        openSpeakerDetail(speakerId)
+                    }
+                })
+                binding.recyclerViewRecommendedSpeakers.adapter = adapter
+            }
+            is Results.Error -> {
+                Log.e("SearchActivity", "Error loading data") // Log error state
+                binding.progressBar.visibility = View.GONE
+            }
+        }
     }
 
     private fun openSpeakerDetail(speakerId: String) {
