@@ -3,7 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_profile">Profile</string>
-
     <string name="motto">- Find Your Ideal Speaker -</string>
     <string name="greetings">Welcome to Narsumku! Connect with inspiring speakers and elevate your seminars to the next level.</string>
     <string name="login">Log In</string>
@@ -33,13 +32,16 @@
     <string name="speakers">Speakers</string>
     <string name="favorite">Favorite</string>
     <string name="searchbar_hint">Masukkan kata</string>
-
     <string name="date">Date of Birth</string>
     <string name="success_title">Yeah!</string>
     <string name="error_title">Oops!</string>
     <string name="search">Search</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_chat">Chat</string>
     <string name="subs">Subscription</string>
+    <string name="profile_image_description">Profile Photo</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="logout">Logout</string>
+    <string name="delete_account">Delete Account</string>
 </resources>
