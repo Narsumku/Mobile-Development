@@ -1,12 +1,13 @@
 package com.bangkit.narsumku.ui.detail
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.bangkit.narsumku.data.Results
 import com.bangkit.narsumku.data.response.SpeakerDetailResponse
@@ -33,6 +34,8 @@ class SpeakerDetailActivity : AppCompatActivity() {
 
         val speakerId = intent.getStringExtra("SPEAKER_ID") ?: return
 
+        supportPostponeEnterTransition()
+
         setupFavorite(speakerId)
         viewModel.speakerDetail.observe(this) { result ->
             when (result) {
@@ -52,7 +55,7 @@ class SpeakerDetailActivity : AppCompatActivity() {
                     binding.tvOccupation.text = speaker.occupation
                     binding.tvEmail.text = speaker.email
                     binding.tvHeadline.text = speaker.headline
-                    if(speaker.summary != null) {
+                    if (speaker.summary != null) {
                         binding.tvSummary.text = speaker.summary
                     } else {
                         binding.tvSummary.text = "Summary for this speaker is not set yet"
@@ -64,8 +67,10 @@ class SpeakerDetailActivity : AppCompatActivity() {
                     val category3 = speaker.category3
 
 
-                    binding.tvCategory.text = listOfNotNull(category1, category2, category3).joinToString("\n")
+                    binding.tvCategory.text =
+                        listOfNotNull(category1, category2, category3).joinToString("\n")
                     setupShareButton(speaker)
+                    setupEmailButton(speaker.email)
                 }
 
                 is Results.Error -> {
@@ -76,6 +81,8 @@ class SpeakerDetailActivity : AppCompatActivity() {
         }
 
         viewModel.getSpeakerDetail(speakerId)
+
+        supportStartPostponedEnterTransition()
     }
 
     private fun setupShareButton(speaker: SpeakerDetailResponse) {
@@ -88,7 +95,13 @@ class SpeakerDetailActivity : AppCompatActivity() {
                 Summary: ${speaker.summary ?: "Not set"}
                 Recent Experience: ${speaker.recentExperience}
                 Experience: ${speaker.experience}
-                Categories: ${listOfNotNull(speaker.category1, speaker.category2, speaker.category3).joinToString("\n")}
+                Categories: ${
+                listOfNotNull(
+                    speaker.category1,
+                    speaker.category2,
+                    speaker.category3
+                ).joinToString("\n")
+            }
             """.trimIndent()
 
             val shareIntent = Intent().apply {
@@ -109,26 +122,64 @@ class SpeakerDetailActivity : AppCompatActivity() {
                             val result = favoriteViewModel.addFavorite(user.userId, speakerId)
                             if (result is Results.Success && result.data.message == "Speaker is already a favorite for this user.") {
                                 // Jika speaker sudah menjadi favorit, hapus dari favorit
-                                Log.d("SpeakerDetailActivity", "Speaker already a favorite, attempting to remove favorite")
+                                Log.d(
+                                    "SpeakerDetailActivity",
+                                    "Speaker already a favorite, attempting to remove favorite"
+                                )
                                 favoriteViewModel.deleteFavorite(user.userId, speakerId)
-                                Toast.makeText(this@SpeakerDetailActivity, "Removed from favorites", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this@SpeakerDetailActivity,
+                                    "Removed from favorites",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             } else if (result is Results.Success) {
                                 Log.d("SpeakerDetailActivity", "Successfully added to favorites")
-                                Toast.makeText(this@SpeakerDetailActivity, "Added to favorites", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this@SpeakerDetailActivity,
+                                    "Added to favorites",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             } else if (result is Results.Error) {
-                                Log.e("SpeakerDetailActivity", "Failed to add favorite: ${result.error}")
-                                Toast.makeText(this@SpeakerDetailActivity, "Failed to add favorite: ${result.error}", Toast.LENGTH_SHORT).show()
+                                Log.e(
+                                    "SpeakerDetailActivity",
+                                    "Failed to add favorite: ${result.error}"
+                                )
+                                Toast.makeText(
+                                    this@SpeakerDetailActivity,
+                                    "Failed to add favorite: ${result.error}",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         } catch (e: Exception) {
-                            Log.e("SpeakerDetailActivity", "Exception while adding/removing favorite", e)
-                            Toast.makeText(this@SpeakerDetailActivity, "Failed to add/remove favorite", Toast.LENGTH_SHORT).show()
+                            Log.e(
+                                "SpeakerDetailActivity",
+                                "Exception while adding/removing favorite",
+                                e
+                            )
+                            Toast.makeText(
+                                this@SpeakerDetailActivity,
+                                "Failed to add/remove favorite",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
             } else {
                 Log.w("SpeakerDetailActivity", "User not logged in")
-                Toast.makeText(this@SpeakerDetailActivity, "User not logged in", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@SpeakerDetailActivity, "User not logged in", Toast.LENGTH_SHORT)
+                    .show()
             }
+        }
+    }
+
+    private fun setupEmailButton(email: String) {
+        binding.tvEmail.setOnClickListener {
+            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:$email")
+                putExtra(Intent.EXTRA_SUBJECT, "Subject Here")
+                putExtra(Intent.EXTRA_TEXT, "Body of the email")
+            }
+            startActivity(Intent.createChooser(emailIntent, "Send email via..."))
         }
     }
 }

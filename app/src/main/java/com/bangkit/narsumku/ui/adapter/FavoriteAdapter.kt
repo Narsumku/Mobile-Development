@@ -1,5 +1,8 @@
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.narsumku.data.response.GetFavoriteResponse
 import com.bangkit.narsumku.databinding.ItemRecommendationSpeakerBinding
@@ -11,10 +14,11 @@ class FavoriteAdapter(
 ) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
     interface OnItemClickListener {
-        fun onItemClick(speakerId: String)
+        fun onItemClick(speakerId: String, optionsCompat: ActivityOptionsCompat)
     }
 
-    inner class FavoriteViewHolder(private val binding: ItemRecommendationSpeakerBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class FavoriteViewHolder(private val binding: ItemRecommendationSpeakerBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(speaker: GetFavoriteResponse) {
             Glide.with(binding.root.context)
                 .load(speaker.profilePicUrl)
@@ -24,13 +28,25 @@ class FavoriteAdapter(
             binding.tvSpeakerExperience.text = speaker.experience
             binding.tvSpeakerField.text = speaker.field
             binding.root.setOnClickListener {
-                itemClickListener.onItemClick(speaker.speakerId)
+                val context = itemView.context as Activity
+                val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    context,
+                    Pair(binding.ivSpeakerPhoto, "speakerAvatar"),
+                    Pair(binding.tvSpeakerName, "speakerName"),
+                    Pair(binding.tvSpeakerExperience, "speakerExperience"),
+                    Pair(binding.tvSpeakerField, "speakerCategory")
+                )
+                itemClickListener.onItemClick(speaker.speakerId, optionsCompat)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
-        val binding = ItemRecommendationSpeakerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemRecommendationSpeakerBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return FavoriteViewHolder(binding)
     }
 

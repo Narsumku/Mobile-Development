@@ -2,7 +2,7 @@ package com.bangkit.narsumku.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class ErrorResponse (
+data class ErrorResponse(
     @field:SerializedName("error")
     val error: Boolean? = null,
 

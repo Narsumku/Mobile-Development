@@ -3,13 +3,9 @@ package com.bangkit.narsumku.ui.welcome
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.WindowInsets
-import android.view.WindowManager
-import com.bangkit.narsumku.R
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.narsumku.databinding.ActivityWelcomeBinding
 import com.bangkit.narsumku.ui.login.LoginActivity
 import com.bangkit.narsumku.ui.signup.SignupActivity

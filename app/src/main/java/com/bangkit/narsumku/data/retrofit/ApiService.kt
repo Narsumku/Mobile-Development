@@ -3,18 +3,17 @@ package com.bangkit.narsumku.data.retrofit
 import com.bangkit.narsumku.data.request.AddFavoriteRequest
 import com.bangkit.narsumku.data.request.DeleteFavoriteRequest
 import com.bangkit.narsumku.data.request.LoginRequest
-import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.request.SignupRequest
 import com.bangkit.narsumku.data.response.AddFavoriteResponse
 import com.bangkit.narsumku.data.response.DeleteFavoriteResponse
 import com.bangkit.narsumku.data.response.GetFavoriteResponse
+import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.response.PopularSpeaker
-import com.bangkit.narsumku.data.response.RecommendationSpeaker
-import com.bangkit.narsumku.data.response.Speaker
+import com.bangkit.narsumku.data.response.RecommendationSpeakerResponse
 import com.bangkit.narsumku.data.response.SignupResponse
+import com.bangkit.narsumku.data.response.Speaker
 import com.bangkit.narsumku.data.response.SpeakerDetailResponse
 import retrofit2.http.Body
-import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.HTTP
 import retrofit2.http.POST
@@ -47,7 +46,7 @@ interface ApiService {
     suspend fun getHomeForPopular(): List<PopularSpeaker>
 
     @GET("recommendations")
-    suspend fun getHomeForRecommendation(): List<RecommendationSpeaker>
+    suspend fun getHomeForRecommendation(): List<RecommendationSpeakerResponse>
 
     @POST("favorites")
     suspend fun addFavorite(

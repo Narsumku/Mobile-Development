@@ -5,15 +5,15 @@ import com.bangkit.narsumku.data.pref.UserModel
 import com.bangkit.narsumku.data.pref.UserPreference
 import com.bangkit.narsumku.data.request.AddFavoriteRequest
 import com.bangkit.narsumku.data.request.DeleteFavoriteRequest
-import com.bangkit.narsumku.data.response.ErrorResponse
 import com.bangkit.narsumku.data.request.LoginRequest
-import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.request.SignupRequest
 import com.bangkit.narsumku.data.response.AddFavoriteResponse
 import com.bangkit.narsumku.data.response.DeleteFavoriteResponse
+import com.bangkit.narsumku.data.response.ErrorResponse
 import com.bangkit.narsumku.data.response.GetFavoriteResponse
+import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.response.PopularSpeaker
-import com.bangkit.narsumku.data.response.RecommendationSpeaker
+import com.bangkit.narsumku.data.response.RecommendationSpeakerResponse
 import com.bangkit.narsumku.data.response.SignupResponse
 import com.bangkit.narsumku.data.response.Speaker
 import com.bangkit.narsumku.data.response.SpeakerDetailResponse
@@ -71,6 +71,7 @@ class UserRepository private constructor(
                 val session = client.loginResult?.let {
                     UserModel(
                         email = email,
+                        username = it.username,
                         userId = it.userId,
                         token = it.token,
                         isLogin = true
@@ -130,7 +131,7 @@ class UserRepository private constructor(
         }
     }
 
-    suspend fun getHomeForRecommendation(): Results<List<RecommendationSpeaker>> {
+    suspend fun getHomeForRecommendation(): Results<List<RecommendationSpeakerResponse>> {
         return try {
             val response = apiService.getHomeForRecommendation()
             Log.d("UserRepository", "Home Response: ${Gson().toJson(response)}")

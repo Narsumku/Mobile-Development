@@ -5,268 +5,268 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".ui.preferences.PreferencesActivity">
-
-    <TextView
-        android:id="@+id/tvChoose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/blue"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Choose Your Preferences" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintRound"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:background="@drawable/round_gray_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvChoose"
-        app:layout_constraintVertical_bias="0.0">
+        tools:context=".ui.preferences.PreferencesActivity">
 
-        <LinearLayout
-            android:id="@+id/BussinessLinearLayout"
+        <TextView
+            android:id="@+id/tvChoose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="54dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:src="@drawable/bussiness"
-                app:shapeAppearanceOverlay="@style/RoundImage" />
-
-            <CheckBox
-                android:id="@+id/checkBoxBussiness"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bussiness"
-                android:textColor="@color/blue"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/EntertainmentLinearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="54dp"
-            android:gravity="center"
-            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/blue"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Choose Your Preferences" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:src="@drawable/entertaintment"
-                app:shapeAppearanceOverlay="@style/RoundImage" />
-
-            <CheckBox
-                android:id="@+id/checkBoxEntertainment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Entertainment"
-                android:textColor="@color/blue"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/PoliticsLinearLayout"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintRound"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="@id/BussinessLinearLayout"
-            app:layout_constraintStart_toStartOf="@id/BussinessLinearLayout"
-            app:layout_constraintTop_toBottomOf="@id/BussinessLinearLayout">
+            android:layout_margin="16dp"
+            android:background="@drawable/round_gray_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvChoose"
+            app:layout_constraintVertical_bias="0.0">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:src="@drawable/politician"
-                app:shapeAppearanceOverlay="@style/RoundImage" />
-
-            <CheckBox
-                android:id="@+id/checkBoxPolitics"
+            <LinearLayout
+                android:id="@+id/BussinessLinearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Politics"
-                android:textColor="@color/blue"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_marginStart="54dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/SportLinearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="@id/EntertainmentLinearLayout"
-            app:layout_constraintStart_toStartOf="@id/EntertainmentLinearLayout"
-            app:layout_constraintTop_toBottomOf="@id/EntertainmentLinearLayout">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:src="@drawable/bussiness"
+                    app:shapeAppearanceOverlay="@style/RoundImage" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:src="@drawable/sport"
-                app:shapeAppearanceOverlay="@style/RoundImage" />
+                <CheckBox
+                    android:id="@+id/checkBoxBussiness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bussiness"
+                    android:textColor="@color/blue"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/checkBoxSport"
+            <LinearLayout
+                android:id="@+id/EntertainmentLinearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sport"
-                android:textColor="@color/blue"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="54dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/TechLinearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="@id/BussinessLinearLayout"
-            app:layout_constraintStart_toStartOf="@id/BussinessLinearLayout"
-            app:layout_constraintTop_toBottomOf="@id/PoliticsLinearLayout">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:src="@drawable/entertaintment"
+                    app:shapeAppearanceOverlay="@style/RoundImage" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:src="@drawable/tech"
-                app:shapeAppearanceOverlay="@style/RoundImage" />
+                <CheckBox
+                    android:id="@+id/checkBoxEntertainment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Entertainment"
+                    android:textColor="@color/blue"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/checkBoxTech"
+            <LinearLayout
+                android:id="@+id/PoliticsLinearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tech"
-                android:textColor="@color/blue"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/BussinessLinearLayout"
+                app:layout_constraintStart_toStartOf="@id/BussinessLinearLayout"
+                app:layout_constraintTop_toBottomOf="@id/BussinessLinearLayout">
 
-        <LinearLayout
-            android:id="@+id/HealthcareLinearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="@id/EntertainmentLinearLayout"
-            app:layout_constraintStart_toStartOf="@id/EntertainmentLinearLayout"
-            app:layout_constraintTop_toBottomOf="@id/SportLinearLayout">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:src="@drawable/politician"
+                    app:shapeAppearanceOverlay="@style/RoundImage" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:src="@drawable/healthcare"
-                app:shapeAppearanceOverlay="@style/RoundImage" />
+                <CheckBox
+                    android:id="@+id/checkBoxPolitics"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Politics"
+                    android:textColor="@color/blue"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/checkBoxHealthcare"
+            <LinearLayout
+                android:id="@+id/SportLinearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Healthcare"
-                android:textColor="@color/blue"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/EntertainmentLinearLayout"
+                app:layout_constraintStart_toStartOf="@id/EntertainmentLinearLayout"
+                app:layout_constraintTop_toBottomOf="@id/EntertainmentLinearLayout">
 
-        <LinearLayout
-            android:id="@+id/AcademicLinearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="@id/BussinessLinearLayout"
-            app:layout_constraintStart_toStartOf="@id/BussinessLinearLayout"
-            app:layout_constraintTop_toBottomOf="@id/TechLinearLayout">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:src="@drawable/sport"
+                    app:shapeAppearanceOverlay="@style/RoundImage" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:src="@drawable/academics"
-                app:shapeAppearanceOverlay="@style/RoundImage" />
+                <CheckBox
+                    android:id="@+id/checkBoxSport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sport"
+                    android:textColor="@color/blue"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/checkBoxAcademic"
+            <LinearLayout
+                android:id="@+id/TechLinearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Academic"
-                android:textColor="@color/blue"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/BussinessLinearLayout"
+                app:layout_constraintStart_toStartOf="@id/BussinessLinearLayout"
+                app:layout_constraintTop_toBottomOf="@id/PoliticsLinearLayout">
 
-        <LinearLayout
-            android:id="@+id/MediaLinearLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="@id/EntertainmentLinearLayout"
-            app:layout_constraintStart_toStartOf="@id/EntertainmentLinearLayout"
-            app:layout_constraintTop_toBottomOf="@id/HealthcareLinearLayout">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:src="@drawable/tech"
+                    app:shapeAppearanceOverlay="@style/RoundImage" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:src="@drawable/media"
-                app:shapeAppearanceOverlay="@style/RoundImage" />
+                <CheckBox
+                    android:id="@+id/checkBoxTech"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tech"
+                    android:textColor="@color/blue"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-            <CheckBox
-                android:id="@+id/checkBoxMedia"
+            <LinearLayout
+                android:id="@+id/HealthcareLinearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Media &amp; News"
-                android:textColor="@color/blue"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/EntertainmentLinearLayout"
+                app:layout_constraintStart_toStartOf="@id/EntertainmentLinearLayout"
+                app:layout_constraintTop_toBottomOf="@id/SportLinearLayout">
 
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:src="@drawable/healthcare"
+                    app:shapeAppearanceOverlay="@style/RoundImage" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxHealthcare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Healthcare"
+                    android:textColor="@color/blue"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/AcademicLinearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/BussinessLinearLayout"
+                app:layout_constraintStart_toStartOf="@id/BussinessLinearLayout"
+                app:layout_constraintTop_toBottomOf="@id/TechLinearLayout">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:src="@drawable/academics"
+                    app:shapeAppearanceOverlay="@style/RoundImage" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxAcademic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Academic"
+                    android:textColor="@color/blue"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/MediaLinearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@id/EntertainmentLinearLayout"
+                app:layout_constraintStart_toStartOf="@id/EntertainmentLinearLayout"
+                app:layout_constraintTop_toBottomOf="@id/HealthcareLinearLayout">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:src="@drawable/media"
+                    app:shapeAppearanceOverlay="@style/RoundImage" />
+
+                <CheckBox
+                    android:id="@+id/checkBoxMedia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Media &amp; News"
+                    android:textColor="@color/blue"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="190dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/blue"
+            android:text="Set Preferences"
+            android:fontFamily="@font/leaguespartan"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintRound" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="190dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/blue"
-        android:text="Set Preferences"
-        android:fontFamily="@font/leaguespartan"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintRound"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

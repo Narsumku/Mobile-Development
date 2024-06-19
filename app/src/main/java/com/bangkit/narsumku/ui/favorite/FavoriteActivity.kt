@@ -2,15 +2,14 @@ package com.bangkit.narsumku.ui.favorite
 
 import FavoriteAdapter
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bangkit.narsumku.data.Results
 import com.bangkit.narsumku.databinding.ActivityFavoriteBinding
 import com.bangkit.narsumku.ui.ViewModelFactory
 import com.bangkit.narsumku.ui.detail.SpeakerDetailActivity
@@ -27,6 +26,10 @@ class FavoriteActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupFavoriteRecyclerView()
+
+        binding.ivArrowBack.setOnClickListener {
+            onBackPressed()
+        }
 
         viewModel.getUserSession().observe(this) { user ->
             if (user.isLogin) {
@@ -54,8 +57,8 @@ class FavoriteActivity : AppCompatActivity() {
 
     private fun setupFavoriteRecyclerView() {
         adapter = FavoriteAdapter(mutableListOf(), object : FavoriteAdapter.OnItemClickListener {
-            override fun onItemClick(speakerId: String) {
-                openSpeakerDetail(speakerId)
+            override fun onItemClick(speakerId: String, optionsCompat: ActivityOptionsCompat) {
+                openSpeakerDetail(speakerId, optionsCompat)
             }
         })
         binding.recyclerViewSpeakers.layoutManager = LinearLayoutManager(this)
@@ -68,9 +71,9 @@ class FavoriteActivity : AppCompatActivity() {
         }
     }
 
-    private fun openSpeakerDetail(speakerId: String) {
+    private fun openSpeakerDetail(speakerId: String, optionsCompat: ActivityOptionsCompat) {
         val intent = Intent(this, SpeakerDetailActivity::class.java)
         intent.putExtra("SPEAKER_ID", speakerId)
-        startActivity(intent)
+        startActivity(intent, optionsCompat.toBundle())
     }
 }

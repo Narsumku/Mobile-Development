@@ -91,7 +91,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvGreetings"
         android:alpha="0"
-        tools:alpha="100"/>
+        tools:alpha="100" />
 
     <Button
         android:id="@+id/btnSignup"
@@ -107,6 +107,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
         android:alpha="0"
-        tools:alpha="100"/>
+        tools:alpha="100" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,7 +2,7 @@ package com.bangkit.narsumku.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginResponse (
+data class LoginResponse(
 
     @field:SerializedName("error")
     val error: Boolean,
@@ -14,9 +14,9 @@ data class LoginResponse (
     val loginResult: LoginResult? = null
 )
 
-data class LoginResult (
+data class LoginResult(
 
-    @field:SerializedName("username")
+    @field:SerializedName("name")
     val username: String,
 
     @field:SerializedName("userId")

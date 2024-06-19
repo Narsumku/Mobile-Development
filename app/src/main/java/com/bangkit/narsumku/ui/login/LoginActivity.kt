@@ -3,18 +3,18 @@ package com.bangkit.narsumku.ui.login
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
-import com.bangkit.narsumku.ui.main.MainActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.narsumku.data.Results
 import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.databinding.ActivityLoginBinding
 import com.bangkit.narsumku.ui.ViewModelFactory
+import com.bangkit.narsumku.ui.main.MainActivity
 import com.bangkit.narsumku.ui.signup.SignupActivity
 import com.bangkit.narsumku.ui.welcome.WelcomeActivity
 
@@ -36,18 +36,30 @@ class LoginActivity : AppCompatActivity() {
 
     private fun playAnimation() {
 
-        val login = ObjectAnimator.ofFloat(binding.btnLogin, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
-        val welcome = ObjectAnimator.ofFloat(binding.tvWelcome, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
-        val intro = ObjectAnimator.ofFloat(binding.tvAppIntro, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
-        val tvEmail = ObjectAnimator.ofFloat(binding.tvEmailOrMobileNumber, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
-        val email = ObjectAnimator.ofFloat(binding.EmailEditText, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
-        val layoutEmail = ObjectAnimator.ofFloat(binding.EmailEditTextLayout, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
-        val tvPassword = ObjectAnimator.ofFloat(binding.tvPassword, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
-        val password = ObjectAnimator.ofFloat(binding.PasswordEditText, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
-        val layoutPassword = ObjectAnimator.ofFloat(binding.PasswordEditTextLayout, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
-        val forgotPassword = ObjectAnimator.ofFloat(binding.tvForgetPassword, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
-        val account = ObjectAnimator.ofFloat(binding.tvNoAccount, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
-        val signup = ObjectAnimator.ofFloat(binding.btnSignup, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
+        val login =
+            ObjectAnimator.ofFloat(binding.btnLogin, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
+        val welcome = ObjectAnimator.ofFloat(binding.tvWelcome, View.ALPHA, 1f)
+            .setDuration(ANIMATION_DURATION)
+        val intro = ObjectAnimator.ofFloat(binding.tvAppIntro, View.ALPHA, 1f)
+            .setDuration(ANIMATION_DURATION)
+        val tvEmail = ObjectAnimator.ofFloat(binding.tvEmailOrMobileNumber, View.ALPHA, 1f)
+            .setDuration(ANIMATION_DURATION)
+        val email = ObjectAnimator.ofFloat(binding.EmailEditText, View.ALPHA, 1f)
+            .setDuration(ANIMATION_DURATION)
+        val layoutEmail = ObjectAnimator.ofFloat(binding.EmailEditTextLayout, View.ALPHA, 1f)
+            .setDuration(ANIMATION_DURATION)
+        val tvPassword = ObjectAnimator.ofFloat(binding.tvPassword, View.ALPHA, 1f)
+            .setDuration(ANIMATION_DURATION)
+        val password = ObjectAnimator.ofFloat(binding.PasswordEditText, View.ALPHA, 1f)
+            .setDuration(ANIMATION_DURATION)
+        val layoutPassword = ObjectAnimator.ofFloat(binding.PasswordEditTextLayout, View.ALPHA, 1f)
+            .setDuration(ANIMATION_DURATION)
+        val forgotPassword = ObjectAnimator.ofFloat(binding.tvForgetPassword, View.ALPHA, 1f)
+            .setDuration(ANIMATION_DURATION)
+        val account = ObjectAnimator.ofFloat(binding.tvNoAccount, View.ALPHA, 1f)
+            .setDuration(ANIMATION_DURATION)
+        val signup = ObjectAnimator.ofFloat(binding.btnSignup, View.ALPHA, 1f)
+            .setDuration(ANIMATION_DURATION)
 
         val together = AnimatorSet().apply {
             playTogether(account, signup)

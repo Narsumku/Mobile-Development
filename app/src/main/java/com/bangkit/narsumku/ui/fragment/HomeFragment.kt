@@ -6,12 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bangkit.narsumku.data.Results
-import com.bangkit.narsumku.data.response.PopularSpeaker
 import com.bangkit.narsumku.databinding.FragmentHomeBinding
 import com.bangkit.narsumku.ui.ViewModelFactory
 import com.bangkit.narsumku.ui.adapter.PopularSpeakerAdapter
@@ -39,6 +39,12 @@ class HomeFragment : Fragment() {
             observePopularResponse()
             observeRecommendationResponse()
         }
+
+        homeViewModel.getUserSession().observe(viewLifecycleOwner) { user ->
+            if (user.isLogin) {
+                binding.tvUsername.text = user.username
+            }
+        }
         setupRecyclerViews()
         setupFavoriteButton()
     }
@@ -61,16 +67,23 @@ class HomeFragment : Fragment() {
                 Log.d("SearchActivity", "Loading data...") // Log loading state
                 binding.progressBar.visibility = View.VISIBLE
             }
+
             is Results.Success -> {
                 Log.d("SearchActivity", "Data loaded successfully") // Log success state
                 binding.progressBar.visibility = View.GONE
-                val adapter = PopularSpeakerAdapter(popular.data, object : PopularSpeakerAdapter.OnItemClickListener {
-                    override fun onItemClick(speakerId: String) {
-                        openSpeakerDetail(speakerId)
-                    }
-                })
+                val adapter = PopularSpeakerAdapter(
+                    popular.data,
+                    object : PopularSpeakerAdapter.OnItemClickListener {
+                        override fun onItemClick(
+                            speakerId: String,
+                            optionsCompat: ActivityOptionsCompat
+                        ) {
+                            openSpeakerDetail(speakerId, optionsCompat)
+                        }
+                    })
                 binding.recyclerViewPopularSpeakers.adapter = adapter
             }
+
             is Results.Error -> {
                 Log.e("SearchActivity", "Error loading data") // Log error state
                 binding.progressBar.visibility = View.GONE
@@ -84,16 +97,23 @@ class HomeFragment : Fragment() {
                 Log.d("SearchActivity", "Loading data...") // Log loading state
                 binding.progressBar.visibility = View.VISIBLE
             }
+
             is Results.Success -> {
                 Log.d("SearchActivity", "Data loaded successfully") // Log success state
                 binding.progressBar.visibility = View.GONE
-                val adapter = RecommendationSpeakerAdapter(recommendation.data, object : RecommendationSpeakerAdapter.OnItemClickListener {
-                    override fun onItemClick(speakerId: String) {
-                        openSpeakerDetail(speakerId)
-                    }
-                })
+                val adapter = RecommendationSpeakerAdapter(
+                    recommendation.data,
+                    object : RecommendationSpeakerAdapter.OnItemClickListener {
+                        override fun onItemClick(
+                            speakerId: String,
+                            optionsCompat: ActivityOptionsCompat
+                        ) {
+                            openSpeakerDetail(speakerId, optionsCompat)
+                        }
+                    })
                 binding.recyclerViewRecommendedSpeakers.adapter = adapter
             }
+
             is Results.Error -> {
                 Log.e("SearchActivity", "Error loading data") // Log error state
                 binding.progressBar.visibility = View.GONE
@@ -101,9 +121,9 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun openSpeakerDetail(speakerId: String) {
+    private fun openSpeakerDetail(speakerId: String, optionsCompat: ActivityOptionsCompat) {
         val intent = Intent(requireContext(), SpeakerDetailActivity::class.java)
         intent.putExtra("SPEAKER_ID", speakerId)
-        startActivity(intent)
+        startActivity(intent, optionsCompat.toBundle())
     }
 }

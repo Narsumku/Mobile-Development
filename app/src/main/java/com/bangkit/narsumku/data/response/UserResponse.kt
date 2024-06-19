@@ -2,7 +2,7 @@ package com.bangkit.narsumku.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class UserResponse (
+data class UserResponse(
 
     @field:SerializedName("email")
     val email: String,

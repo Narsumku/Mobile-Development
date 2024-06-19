@@ -2,7 +2,7 @@ package com.bangkit.narsumku.data.request
 
 import com.google.gson.annotations.SerializedName
 
-data class AddFavoriteRequest (
+data class AddFavoriteRequest(
 
     @field:SerializedName("userId")
     val userId: String,

@@ -2,7 +2,7 @@ package com.bangkit.narsumku.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class RecommendationSpeaker (
+data class RecommendationSpeakerResponse(
 
     @field:SerializedName("speaker_id")
     val speakerId: String,

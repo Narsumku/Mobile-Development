@@ -1,7 +1,10 @@
 package com.bangkit.narsumku.ui.adapter
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.narsumku.data.response.PopularSpeaker
 import com.bangkit.narsumku.databinding.ItemPopularSpeakerBinding
@@ -13,10 +16,11 @@ class PopularSpeakerAdapter(
 ) : RecyclerView.Adapter<PopularSpeakerAdapter.PopularViewHolder>() {
 
     interface OnItemClickListener {
-        fun onItemClick(speakerId: String)
+        fun onItemClick(speakerId: String, optionsCompat: ActivityOptionsCompat)
     }
 
-    inner class PopularViewHolder(private val binding: ItemPopularSpeakerBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class PopularViewHolder(private val binding: ItemPopularSpeakerBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(speaker: PopularSpeaker) {
             Glide.with(binding.root.context)
                 .load(speaker.profilePicUrl)
@@ -25,14 +29,23 @@ class PopularSpeakerAdapter(
             binding.tvSpeakerRating.text = speaker.rating.toString()
             binding.tvSpeakerExperience.text = speaker.experience
             binding.tvSpeakerFavorite.text = speaker.favoriteCount.toString()
+
             binding.root.setOnClickListener {
-                itemClickListener.onItemClick(speaker.speakerId)
+                val context = itemView.context as Activity
+                val optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                    context,
+                    Pair(binding.ivSpeakerPhoto, "speakerAvatar"),
+                    Pair(binding.tvSpeakerName, "speakerName"),
+                    Pair(binding.tvSpeakerExperience, "speakerExperience")
+                )
+                itemClickListener.onItemClick(speaker.speakerId, optionsCompat)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularViewHolder {
-        val binding = ItemPopularSpeakerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemPopularSpeakerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PopularViewHolder(binding)
     }
 

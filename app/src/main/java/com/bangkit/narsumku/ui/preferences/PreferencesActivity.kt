@@ -1,7 +1,7 @@
 package com.bangkit.narsumku.ui.preferences
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.narsumku.R
 
 class PreferencesActivity : AppCompatActivity() {

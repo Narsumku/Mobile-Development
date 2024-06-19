@@ -2,7 +2,7 @@ package com.bangkit.narsumku.data.response
 
 import com.google.gson.annotations.SerializedName
 
-data class SearchResponse (
+data class SearchResponse(
 
     @field:SerializedName("speakers")
     val speakers: List<Speaker>

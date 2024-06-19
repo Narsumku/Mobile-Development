@@ -2,7 +2,7 @@ package com.bangkit.narsumku.data.request
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginRequest (
+data class LoginRequest(
 
     @field:SerializedName("email")
     val email: String,

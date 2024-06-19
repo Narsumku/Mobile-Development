@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@id/appbar"
         app:layout_constraintStart_toStartOf="parent"
         android:alpha="0"
-        tools:alpha="100"/>
+        tools:alpha="100" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/FullNameEditTextLayout"
@@ -117,7 +117,7 @@
         app:layout_constraintTop_toBottomOf="@id/FullNameEditTextLayout"
         app:layout_constraintStart_toStartOf="parent"
         android:alpha="0"
-        tools:alpha="100"/>
+        tools:alpha="100" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/PasswordEditTextLayout"
@@ -164,7 +164,7 @@
         app:layout_constraintTop_toBottomOf="@id/PasswordEditTextLayout"
         app:layout_constraintStart_toStartOf="parent"
         android:alpha="0"
-        tools:alpha="100"/>
+        tools:alpha="100" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/EmailEditTextLayout"
@@ -209,7 +209,7 @@
         app:layout_constraintTop_toBottomOf="@id/EmailEditTextLayout"
         app:layout_constraintStart_toStartOf="parent"
         android:alpha="0"
-        tools:alpha="100"/>
+        tools:alpha="100" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/MobileNumberEditTextLayout"
@@ -254,7 +254,7 @@
         app:layout_constraintTop_toBottomOf="@id/MobileNumberEditTextLayout"
         app:layout_constraintStart_toStartOf="parent"
         android:alpha="0"
-        tools:alpha="100"/>
+        tools:alpha="100" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/DateOfBirthEditTextLayout"
@@ -320,7 +320,7 @@
             app:layout_constraintEnd_toStartOf="@id/btnSignup"
             app:layout_constraintStart_toStartOf="parent"
             android:alpha="0"
-            tools:alpha="100"/>
+            tools:alpha="100" />
 
         <TextView
             android:id="@+id/tvAnd"
@@ -335,7 +335,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvTerms"
             android:alpha="0"
-            tools:alpha="100"/>
+            tools:alpha="100" />
 
         <TextView
             android:id="@+id/tvPolicy"
@@ -351,7 +351,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvTerms"
             android:alpha="0"
-            tools:alpha="100"/>
+            tools:alpha="100" />
     </LinearLayout>
 
     <Button
@@ -391,7 +391,7 @@
             app:layout_constraintEnd_toStartOf="@id/btnSignup"
             app:layout_constraintStart_toStartOf="parent"
             android:alpha="0"
-            tools:alpha="100"/>
+            tools:alpha="100" />
 
         <TextView
             android:id="@+id/btnLogin"
@@ -407,7 +407,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvNoAccount"
             android:alpha="0"
-            tools:alpha="100"/>
+            tools:alpha="100" />
     </LinearLayout>
 
     <ProgressBar

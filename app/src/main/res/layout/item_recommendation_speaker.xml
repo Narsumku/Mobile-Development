@@ -18,12 +18,14 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivSpeakerPhoto"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="12dp"
             android:src="@drawable/ic_microphone"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toTopOf="parent"
+            android:transitionName="speakerPhoto" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -44,7 +46,8 @@
                 android:text="Speaker Name"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/blue"/>
+                android:textColor="@color/blue"
+                android:transitionName="speakerName" />
 
             <TextView
                 android:id="@+id/tvSpeakerExperience"
@@ -53,7 +56,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="Experience"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:transitionName="speakerExperience" />
 
             <TextView
                 android:id="@+id/tvSpeakerField"
@@ -62,7 +66,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="Field"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:transitionName="speakerField" />
 
             <TextView
                 android:id="@+id/tvSpeakerRating"
@@ -73,7 +78,7 @@
                 android:layout_marginBottom="8dp"
                 android:text="Rating"
                 android:textSize="14sp"
-                android:drawableLeft="@drawable/ic_stars"/>
+                android:drawableLeft="@drawable/ic_stars" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
