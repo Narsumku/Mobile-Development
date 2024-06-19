@@ -12,7 +12,7 @@
     <string name="email_or_mobile_number">Email or Mobile Number</string>
     <string name="email_example">example@example.com</string>
     <string name="password">Password</string>
-    <string name="password_example">************</string>
+    <string name="password_example">Your Password</string>
     <string name="forget_password">Forget Password</string>
     <string name="no_account">Don\'t have an account?</string>
     <string name="new_account">New Account</string>

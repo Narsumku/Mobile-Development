@@ -201,7 +201,7 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private companion object {
-        const val ANIMATION_DURATION = 250L
+        const val ANIMATION_DURATION = 150L
         const val MIN_PASSWORD_LENGTH = 8
     }
 }

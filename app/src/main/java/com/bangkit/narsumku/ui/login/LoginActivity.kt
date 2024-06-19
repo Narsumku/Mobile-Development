@@ -155,6 +155,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private companion object {
-        const val ANIMATION_DURATION = 250L
+        const val ANIMATION_DURATION = 150L
     }
 }

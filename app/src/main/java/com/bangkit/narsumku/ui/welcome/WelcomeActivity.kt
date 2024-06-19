@@ -25,12 +25,12 @@ class WelcomeActivity : AppCompatActivity() {
 
     private fun playAnimation() {
 
-        val logo = ObjectAnimator.ofFloat(binding.ivLogo, View.ALPHA, 1f).setDuration(250)
-        val login = ObjectAnimator.ofFloat(binding.btnLogin, View.ALPHA, 1f).setDuration(250)
-        val signup = ObjectAnimator.ofFloat(binding.btnSignup, View.ALPHA, 1f).setDuration(250)
-        val appName = ObjectAnimator.ofFloat(binding.tvAppName, View.ALPHA, 1f).setDuration(250)
-        val motto = ObjectAnimator.ofFloat(binding.tvMotto, View.ALPHA, 1f).setDuration(250)
-        val greetings = ObjectAnimator.ofFloat(binding.tvGreetings, View.ALPHA, 1f).setDuration(250)
+        val logo = ObjectAnimator.ofFloat(binding.ivLogo, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
+        val login = ObjectAnimator.ofFloat(binding.btnLogin, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
+        val signup = ObjectAnimator.ofFloat(binding.btnSignup, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
+        val appName = ObjectAnimator.ofFloat(binding.tvAppName, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
+        val motto = ObjectAnimator.ofFloat(binding.tvMotto, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
+        val greetings = ObjectAnimator.ofFloat(binding.tvGreetings, View.ALPHA, 1f).setDuration(ANIMATION_DURATION)
 
         val together = AnimatorSet().apply {
             playTogether(login, signup)
@@ -53,5 +53,9 @@ class WelcomeActivity : AppCompatActivity() {
         binding.btnSignup.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
         }
+    }
+
+    private companion object {
+        const val ANIMATION_DURATION = 150L
     }
 }

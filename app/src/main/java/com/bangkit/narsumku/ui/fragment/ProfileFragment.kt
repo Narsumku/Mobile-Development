@@ -61,9 +61,9 @@ class ProfileFragment : Fragment() {
     private fun handleLogoutButtonClick() {
         // Tampilkan dialog konfirmasi
         AlertDialog.Builder(requireContext())
-            .setTitle("Konfirmasi Keluar")
-            .setMessage("Apakah Anda yakin ingin keluar?")
-            .setPositiveButton("Ya") { dialog, _ ->
+            .setTitle("Confirmation")
+            .setMessage("Are you sure you want to logout?")
+            .setPositiveButton("Yes") { dialog, _ ->
                 // Hapus data pengguna yang masuk secara lokal
                 val sharedPref = activity?.getSharedPreferences("user_pref", Context.MODE_PRIVATE)
                 val editor = sharedPref?.edit()
@@ -74,7 +74,7 @@ class ProfileFragment : Fragment() {
                 navigateToLogin()
                 dialog.dismiss()
             }
-            .setNegativeButton("Tidak") { dialog, _ ->
+            .setNegativeButton("No") { dialog, _ ->
                 // Tutup dialog
                 dialog.dismiss()
             }
