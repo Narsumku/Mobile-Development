@@ -38,4 +38,10 @@
     <string name="success_title">Yeah!</string>
     <string name="error_title">Oops!</string>
     <string name="search">Search</string>
+
+    <string name="profile_image_description">Gambar Profil</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="logout">Logout</string>
+    <string name="delete_account">Delete Akun</string>
 </resources>
