@@ -11,6 +11,7 @@ import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.request.SignupRequest
 import com.bangkit.narsumku.data.response.AddFavoriteResponse
 import com.bangkit.narsumku.data.response.DeleteFavoriteResponse
+import com.bangkit.narsumku.data.response.GetFavoriteResponse
 import com.bangkit.narsumku.data.response.PopularSpeaker
 import com.bangkit.narsumku.data.response.RecommendationSpeaker
 import com.bangkit.narsumku.data.response.SignupResponse
@@ -20,6 +21,7 @@ import com.bangkit.narsumku.data.retrofit.ApiConfig
 import com.bangkit.narsumku.data.retrofit.ApiService
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import retrofit2.HttpException
 
 class UserRepository private constructor(
@@ -162,7 +164,8 @@ class UserRepository private constructor(
 
     suspend fun deleteFavorite(userId: String, speakerId: String): Results<DeleteFavoriteResponse> {
         return try {
-            val response = apiService.deleteFavorite(userId, speakerId)
+            val client = DeleteFavoriteRequest(userId, speakerId)
+            val response = apiService.deleteFavorite(client)
             Results.Success(response)
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()
@@ -171,6 +174,23 @@ class UserRepository private constructor(
             Results.Error(errorMessage.toString())
         } catch (e: Exception) {
             Results.Error(e.localizedMessage ?: "Unknown error")
+        }
+    }
+
+    suspend fun getFavorite(userId: String): Flow<List<GetFavoriteResponse>> {
+        return try {
+            val response = apiService.getFavorite(userId)
+            Log.d("UserRepository", "Get Favorite Response: ${Gson().toJson(response)}")
+            flowOf(response)
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            Log.e("UserRepository", "HTTP Exception: $errorMessage")
+            flowOf(emptyList())
+        } catch (e: Exception) {
+            Log.e("UserRepository", "Exception: ${e.localizedMessage}")
+            flowOf(emptyList())
         }
     }
 

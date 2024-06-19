@@ -7,6 +7,7 @@ import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.request.SignupRequest
 import com.bangkit.narsumku.data.response.AddFavoriteResponse
 import com.bangkit.narsumku.data.response.DeleteFavoriteResponse
+import com.bangkit.narsumku.data.response.GetFavoriteResponse
 import com.bangkit.narsumku.data.response.PopularSpeaker
 import com.bangkit.narsumku.data.response.RecommendationSpeaker
 import com.bangkit.narsumku.data.response.Speaker
@@ -15,6 +16,7 @@ import com.bangkit.narsumku.data.response.SpeakerDetailResponse
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -52,8 +54,13 @@ interface ApiService {
         @Body addFavoriteRequest: AddFavoriteRequest
     ): AddFavoriteResponse
 
-    @DELETE("favorites")
+    @HTTP(method = "DELETE", path = "favorites", hasBody = true)
     suspend fun deleteFavorite(
         @Body deleteFavoriteRequest: DeleteFavoriteRequest
     ): DeleteFavoriteResponse
+
+    @GET("favorites/{userId}")
+    suspend fun getFavorite(
+        @Path("userId") userId: String
+    ): List<GetFavoriteResponse>
 }

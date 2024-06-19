@@ -110,14 +110,8 @@ class SpeakerDetailActivity : AppCompatActivity() {
                             if (result is Results.Success && result.data.message == "Speaker is already a favorite for this user.") {
                                 // Jika speaker sudah menjadi favorit, hapus dari favorit
                                 Log.d("SpeakerDetailActivity", "Speaker already a favorite, attempting to remove favorite")
-                                val deleteResult = favoriteViewModel.deleteFavorite(user.userId, speakerId)
-                                if (deleteResult is Results.Success) {
-                                    Log.d("SpeakerDetailActivity", "Successfully removed from favorites")
-                                    Toast.makeText(this@SpeakerDetailActivity, "Removed from favorites", Toast.LENGTH_SHORT).show()
-                                } else if (deleteResult is Results.Error) {
-                                    Log.e("SpeakerDetailActivity", "Failed to remove favorite: ${deleteResult.error}")
-                                    Toast.makeText(this@SpeakerDetailActivity, "Failed to remove favorite: ${deleteResult.error}", Toast.LENGTH_SHORT).show()
-                                }
+                                favoriteViewModel.deleteFavorite(user.userId, speakerId)
+                                Toast.makeText(this@SpeakerDetailActivity, "Removed from favorites", Toast.LENGTH_SHORT).show()
                             } else if (result is Results.Success) {
                                 Log.d("SpeakerDetailActivity", "Successfully added to favorites")
                                 Toast.makeText(this@SpeakerDetailActivity, "Added to favorites", Toast.LENGTH_SHORT).show()

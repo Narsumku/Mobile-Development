@@ -17,6 +17,7 @@ import com.bangkit.narsumku.ui.ViewModelFactory
 import com.bangkit.narsumku.ui.adapter.PopularSpeakerAdapter
 import com.bangkit.narsumku.ui.adapter.RecommendationSpeakerAdapter
 import com.bangkit.narsumku.ui.detail.SpeakerDetailActivity
+import com.bangkit.narsumku.ui.favorite.FavoriteActivity
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -39,11 +40,19 @@ class HomeFragment : Fragment() {
             observeRecommendationResponse()
         }
         setupRecyclerViews()
+        setupFavoriteButton()
     }
 
     private fun setupRecyclerViews() {
         binding.recyclerViewPopularSpeakers.layoutManager = LinearLayoutManager(context)
         binding.recyclerViewRecommendedSpeakers.layoutManager = LinearLayoutManager(context)
+    }
+
+    private fun setupFavoriteButton() {
+        binding.btnFavorite.setOnClickListener {
+            val intent = Intent(requireContext(), FavoriteActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private suspend fun observePopularResponse() {
