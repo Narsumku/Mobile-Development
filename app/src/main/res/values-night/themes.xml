@@ -19,4 +19,8 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">20%</item>
     </style>
+
+    <style name="CustomActiveIndicator">
+        <item name="android:background">@drawable/rounded_active_indicator</item>
+    </style>
 </resources>

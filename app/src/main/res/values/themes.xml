@@ -20,5 +20,9 @@
         <item name="cornerSize">20%</item>
     </style>
 
+    <style name="CustomActiveIndicator">
+        <item name="android:background">@drawable/rounded_active_indicator</item>
+    </style>
+
     <style name="Theme.Narsumku" parent="Base.Theme.Narsumku" />
 </resources>
