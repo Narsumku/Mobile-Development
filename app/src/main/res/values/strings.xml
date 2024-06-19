@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Narsumku</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_profile">Profile</string>
+
+    <string name="motto">- Find Your Ideal Speaker -</string>
+    <string name="greetings">Welcome to Narsumku! Connect with inspiring speakers and elevate your seminars to the next level.</string>
+    <string name="login">Log In</string>
+    <string name="signup">Sign Up</string>
+    <string name="welcome">Welcome</string>
+    <string name="app_intro">Your go-to platform for finding the perfect speaker to inspire and elevate your seminars. Join us and make every event unforgettable.</string>
+    <string name="email_or_mobile_number">Email or Mobile Number</string>
+    <string name="email_example">example@example.com</string>
+    <string name="password">Password</string>
+    <string name="password_example">************</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="new_account">New Account</string>
+    <string name="full_name">Full Name</string>
+    <string name="name_example">Your full name here</string>
+    <string name="email">Email</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="mobile_number_example">08××××××××××</string>
+    <string name="date_of_birth">DD / MM / YYYY</string>
+    <string name="have_account">Already have an account?</string>
+    <string name="by_continue">By continuing, you agree to</string>
+    <string name="terms">Terms of Use</string>
+    <string name="and">and</string>
+    <string name="policy">Privacy Policy.</string>
+    <string name="hi">Hi, Welcome Back</string>
+    <string name="username">Username</string>
+    <string name="speakers">Speakers</string>
+    <string name="favorite">Favorite</string>
+    <string name="searchbar_hint">Masukkan kata</string>
+
+    <string name="date">Date of Birth</string>
+    <string name="success_title">Yeah!</string>
+    <string name="error_title">Oops!</string>
+    <string name="search">Search</string>
+
+    <string name="profile_image_description">Gambar Profil</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="logout">Logout</string>
+    <string name="delete_account">Delete Akun</string>
+</resources>
