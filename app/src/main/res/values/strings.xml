@@ -78,4 +78,8 @@
     <string name="rating">Rating</string>
     <string name="field">Field</string>
     <string name="no_favorites">You haven\'t added favorite yet.</string>
+    <string name="password_too_short">Password must be at least 8 characters long</string>
+    <string name="invalid_email_format">Invalid email format!</string>
+    <string name="error_empty_name">Name cannot be empty</string>
+    <string name="error_empty_email">Email cannot be empty!</string>
 </resources>

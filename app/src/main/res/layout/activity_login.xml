@@ -125,10 +125,10 @@
         android:alpha="0"
         tools:alpha="100">
 
-        <EditText
+        <com.bangkit.narsumku.ui.custom.EmailEditText
             android:id="@+id/EmailEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/input_background"
             android:ems="10"
             android:hint="@string/email_example"
@@ -170,11 +170,11 @@
         android:alpha="0"
         tools:alpha="100">
 
-        <EditText
+        <com.bangkit.narsumku.ui.custom.PasswordEditText
             android:id="@+id/PasswordEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingEnd="16dp"
+            android:layout_height="match_parent"
+            android:paddingEnd="48dp"
             android:background="@drawable/input_background"
             android:ems="10"
             android:hint="@string/password_example"

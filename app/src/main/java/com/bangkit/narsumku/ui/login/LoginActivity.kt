@@ -10,10 +10,13 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.bangkit.narsumku.R
 import com.bangkit.narsumku.data.Results
 import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.databinding.ActivityLoginBinding
 import com.bangkit.narsumku.ui.ViewModelFactory
+import com.bangkit.narsumku.ui.custom.EmailEditText
+import com.bangkit.narsumku.ui.custom.PasswordEditText
 import com.bangkit.narsumku.ui.main.MainActivity
 import com.bangkit.narsumku.ui.signup.SignupActivity
 import com.bangkit.narsumku.ui.welcome.WelcomeActivity
@@ -23,6 +26,8 @@ class LoginActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var emailEditText: EmailEditText
+    private lateinit var passwordEditText: PasswordEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,12 +92,27 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.EmailEditText.text.toString()
             val password = binding.PasswordEditText.text.toString()
 
-            viewModel.login(email, password)
-            viewModel.loginResult.observe(this) { result ->
-                when (result) {
-                    is Results.Loading -> showLoading(true)
-                    is Results.Success -> handleSuccessResult(result.data)
-                    is Results.Error -> handleErrorResult(result.error)
+            emailEditText = binding.EmailEditText
+            passwordEditText = binding.PasswordEditText
+
+            val isEmailValid = email.isNotBlank()
+            val isPasswordValid = password.length >= 8
+
+            if (isEmailValid && isPasswordValid) {
+                viewModel.login(email, password)
+                viewModel.loginResult.observe(this) { result ->
+                    when (result) {
+                        is Results.Loading -> showLoading(true)
+                        is Results.Success -> handleSuccessResult(result.data)
+                        is Results.Error -> handleErrorResult(result.error)
+                    }
+                }
+            } else {
+                if (!isEmailValid) {
+                    emailEditText.error = getString(R.string.error_empty_email)
+                }
+                if (!isPasswordValid) {
+                    passwordEditText.error = getString(R.string.password_too_short)
                 }
             }
         }

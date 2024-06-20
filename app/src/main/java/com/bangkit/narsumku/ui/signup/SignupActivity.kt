@@ -5,9 +5,7 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +13,9 @@ import com.bangkit.narsumku.R
 import com.bangkit.narsumku.data.Results
 import com.bangkit.narsumku.databinding.ActivitySignupBinding
 import com.bangkit.narsumku.ui.ViewModelFactory
+import com.bangkit.narsumku.ui.custom.EmailEditText
+import com.bangkit.narsumku.ui.custom.NameEditText
+import com.bangkit.narsumku.ui.custom.PasswordEditText
 import com.bangkit.narsumku.ui.login.LoginActivity
 import com.bangkit.narsumku.ui.welcome.WelcomeActivity
 
@@ -23,6 +24,9 @@ class SignupActivity : AppCompatActivity() {
     private val viewModel by viewModels<SignupViewModel> {
         ViewModelFactory.getInstance(this)
     }
+    private lateinit var nameEditText: NameEditText
+    private lateinit var emailEditText: EmailEditText
+    private lateinit var passwordEditText: PasswordEditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,12 +97,12 @@ class SignupActivity : AppCompatActivity() {
                 tvFullName,
                 name,
                 layoutName,
-                tvPassword,
-                password,
-                layoutPassword,
                 tvEmail,
                 email,
                 layoutEmail,
+                tvPassword,
+                password,
+                layoutPassword,
                 tvMobileNumber,
                 mobileNumber,
                 layoutMobilePhone,
@@ -115,11 +119,19 @@ class SignupActivity : AppCompatActivity() {
 
     private fun setupAction() {
         binding.btnSignup.setOnClickListener {
-            val name = binding.FullNameEditText.text?.toString() ?: ""
-            val email = binding.EmailEditText.text?.toString() ?: ""
-            val password = binding.PasswordEditText.text?.toString() ?: ""
+            val name = binding.FullNameEditText.text.toString()
+            val email = binding.EmailEditText.text.toString()
+            val password = binding.PasswordEditText.text.toString()
 
-            if (isValidInput(name, email, password)) {
+            nameEditText = binding.FullNameEditText
+            emailEditText = binding.EmailEditText
+            passwordEditText = binding.PasswordEditText
+
+            val isNameValid = name.isNotBlank()
+            val isEmailValid = email.isNotBlank()
+            val isPasswordValid = password.length >= MIN_PASSWORD_LENGTH
+
+            if (isNameValid && isEmailValid && isPasswordValid) {
                 viewModel.register(name, email, password)
 
                 viewModel.registrationResult.observe(this) { result ->
@@ -142,7 +154,15 @@ class SignupActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(this, "Invalid input", Toast.LENGTH_SHORT).show()
+                if (!isNameValid) {
+                    nameEditText.error = getString(R.string.error_empty_name)
+                }
+                if (!isEmailValid) {
+                    emailEditText.error = getString(R.string.error_empty_email)
+                }
+                if (!isPasswordValid) {
+                    passwordEditText.error = getString(R.string.password_too_short)
+                }
             }
         }
 
@@ -157,11 +177,6 @@ class SignupActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-    }
-
-    private fun isValidInput(name: String, email: String, password: String): Boolean {
-        return name.isNotBlank() && Patterns.EMAIL_ADDRESS.matcher(email)
-            .matches() && password.length >= MIN_PASSWORD_LENGTH
     }
 
     private fun showLoading(isLoading: Boolean) {
