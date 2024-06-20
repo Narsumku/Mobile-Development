@@ -1,3 +1,6 @@
+package com.bangkit.narsumku.ui.adapter
+
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -57,6 +60,7 @@ class FavoriteAdapter(
 
     override fun getItemCount(): Int = speakers.size
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateItems(newSpeakers: List<GetFavoriteResponse>) {
         speakers.clear()
         speakers.addAll(newSpeakers)

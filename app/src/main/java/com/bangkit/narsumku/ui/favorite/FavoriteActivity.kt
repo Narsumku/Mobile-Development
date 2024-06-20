@@ -1,6 +1,6 @@
 package com.bangkit.narsumku.ui.favorite
 
-import FavoriteAdapter
+import com.bangkit.narsumku.ui.adapter.FavoriteAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -28,6 +28,7 @@ class FavoriteActivity : AppCompatActivity() {
         setupFavoriteRecyclerView()
 
         binding.ivArrowBack.setOnClickListener {
+            @Suppress("DEPRECATION")
             onBackPressed()
         }
 

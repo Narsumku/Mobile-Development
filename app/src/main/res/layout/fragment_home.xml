@@ -85,7 +85,8 @@
                         android:src="@drawable/ic_favorite"
                         app:layout_constraintBottom_toBottomOf="@id/ivUserPhoto"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/ivUserPhoto" />
+                        app:layout_constraintTop_toTopOf="@id/ivUserPhoto"
+                        android:contentDescription="@string/button_favorite" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.appcompat.widget.Toolbar>
@@ -136,7 +137,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:fontFamily="@font/leaguespartan"
-                android:text="Most Favorite Speaker"
+                android:text="@string/favorite_speaker"
                 android:textColor="@color/blue"
                 android:textSize="24sp"
                 android:textAlignment="center"
@@ -181,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:fontFamily="@font/leaguespartan"
-                android:text="Recommended Speaker"
+                android:text="@string/recommended_speaker"
                 android:textColor="@color/blue"
                 android:textSize="24sp"
                 android:textAlignment="center"

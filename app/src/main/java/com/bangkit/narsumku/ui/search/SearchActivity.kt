@@ -2,7 +2,6 @@ package com.bangkit.narsumku.ui.search
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -28,12 +27,12 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val field = intent.getStringExtra("FIELD") ?: ""
-        Log.d("SearchActivity", "Field: $field") // Log field
         lifecycleScope.launch {
             speakerObserver(field)
         }
 
         binding.ivArrowBack.setOnClickListener {
+            @Suppress("DEPRECATION")
             onBackPressed()
         }
 
@@ -43,12 +42,10 @@ class SearchActivity : AppCompatActivity() {
     private suspend fun speakerObserver(field: String) {
         when (val search = viewModel.getSearch(field)) {
             is Results.Loading -> {
-                Log.d("SearchActivity", "Loading data...") // Log loading state
                 binding.progressBar.visibility = View.VISIBLE
             }
 
             is Results.Success -> {
-                Log.d("SearchActivity", "Data loaded successfully") // Log success state
                 binding.progressBar.visibility = View.GONE
                 val adapter =
                     SearchAdapter(search.data, object : SearchAdapter.OnItemClickListener {
@@ -63,7 +60,6 @@ class SearchActivity : AppCompatActivity() {
             }
 
             is Results.Error -> {
-                Log.e("SearchActivity", "Error loading data") // Log error state
                 binding.progressBar.visibility = View.GONE
             }
         }

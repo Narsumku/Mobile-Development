@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Search Speaker" />
+            android:text="@string/search_speaker" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintRound"
@@ -62,7 +62,7 @@
                     android:id="@+id/tvBussiness"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bussiness"
+                    android:text="@string/business"
                     android:textColor="@color/blue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -91,7 +91,7 @@
                     android:id="@+id/tvEntertainment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Entertainment"
+                    android:text="@string/entertainment"
                     android:textColor="@color/blue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -120,7 +120,7 @@
                     android:id="@+id/tvPolitics"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Politics"
+                    android:text="@string/politics"
                     android:textColor="@color/blue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -149,7 +149,7 @@
                     android:id="@+id/TextViewSport"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sport"
+                    android:text="@string/sport"
                     android:textColor="@color/blue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -178,7 +178,7 @@
                     android:id="@+id/tvTech"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tech"
+                    android:text="@string/tech"
                     android:textColor="@color/blue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -207,7 +207,7 @@
                     android:id="@+id/tvHealthcare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Healthcare"
+                    android:text="@string/healthcare"
                     android:textColor="@color/blue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -238,7 +238,7 @@
                     android:id="@+id/tvAcademic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Academic"
+                    android:text="@string/academic"
                     android:textColor="@color/blue"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -269,7 +269,7 @@
                     android:id="@+id/tvMedia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Media &amp; News"
+                    android:text="@string/media_and_news"
                     android:textColor="@color/blue"
                     android:textSize="16sp"
                     android:textStyle="bold" />

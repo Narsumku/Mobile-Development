@@ -2,7 +2,6 @@ package com.bangkit.narsumku.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,7 +27,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -66,12 +65,10 @@ class HomeFragment : Fragment() {
     private suspend fun observePopularResponse() {
         when (val popular = homeViewModel.getHomeForPopular()) {
             is Results.Loading -> {
-                Log.d("SearchActivity", "Loading data...") // Log loading state
                 binding.progressBar.visibility = View.VISIBLE
             }
 
             is Results.Success -> {
-                Log.d("SearchActivity", "Data loaded successfully") // Log success state
                 binding.progressBar.visibility = View.GONE
                 val adapter = PopularSpeakerAdapter(
                     popular.data,
@@ -87,7 +84,6 @@ class HomeFragment : Fragment() {
             }
 
             is Results.Error -> {
-                Log.e("SearchActivity", "Error loading data") // Log error state
                 binding.progressBar.visibility = View.GONE
             }
         }
@@ -96,12 +92,10 @@ class HomeFragment : Fragment() {
     private suspend fun observeRecommendationResponse(userId: String) {
         when (val recommendation = homeViewModel.getHomeForRecommendation(userId)) {
             is Results.Loading -> {
-                Log.d("SearchActivity", "Loading data...") // Log loading state
                 binding.progressBar.visibility = View.VISIBLE
             }
 
             is Results.Success -> {
-                Log.d("SearchActivity", "Data loaded successfully") // Log success state
                 binding.progressBar.visibility = View.GONE
                 val adapter = RecommendationSpeakerAdapter(
                     recommendation.data,
@@ -117,7 +111,6 @@ class HomeFragment : Fragment() {
             }
 
             is Results.Error -> {
-                Log.e("SearchActivity", "Error loading data") // Log error state
                 binding.progressBar.visibility = View.GONE
             }
         }

@@ -1,30 +1,29 @@
 package com.bangkit.narsumku.ui.fragment
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import com.bangkit.narsumku.R
-import com.bangkit.narsumku.data.UserRepository
-import com.bangkit.narsumku.data.pref.UserPreference
-import com.bangkit.narsumku.data.pref.dataStore
-import com.bangkit.narsumku.data.retrofit.ApiConfig
+import androidx.lifecycle.lifecycleScope
+import com.bangkit.narsumku.data.Results
+import com.bangkit.narsumku.databinding.FragmentProfileBinding
 import com.bangkit.narsumku.ui.ViewModelFactory
-import com.bangkit.narsumku.ui.login.LoginActivity
 import com.bangkit.narsumku.ui.profile.EditProfileActivity
+import kotlinx.coroutines.launch
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var fullNameEditText: TextView
-    private lateinit var emailEditText: TextView
+    private lateinit var binding: FragmentProfileBinding
+    private lateinit var fullNameTextView: TextView
+    private lateinit var emailTextView: TextView
     private lateinit var btnEdit: Button
     private lateinit var btnDeleteAccount: Button
     private lateinit var btnLogout: Button
@@ -36,74 +35,89 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_profile, container, false)
-        // Initialize views
-        fullNameEditText = view.findViewById(R.id.FullNameEditText)
-        emailEditText = view.findViewById(R.id.EmailEditText)
-        btnEdit = view.findViewById(R.id.btnEdit)
-        btnDeleteAccount = view.findViewById(R.id.btnDeleteAccount)
-        btnLogout = view.findViewById(R.id.btnLogout)
-        return view
+    ): View {
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        fullNameTextView = binding.FullNameEditText
+        emailTextView = binding.EmailEditText
+        btnEdit = binding.btnEdit
+        btnDeleteAccount = binding.btnDeleteAccount
+        btnLogout = binding.btnLogout
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Observe user session
         profileViewModel.getUserSession().observe(viewLifecycleOwner) { user ->
             if (user != null) {
-                fullNameEditText.text = user.username
-                emailEditText.text = user.email
+                viewLifecycleOwner.lifecycleScope.launch {
+                    when (val result = profileViewModel.getUser(user.userId)) {
+                        is Results.Success -> {
+                            result.data.dataUser?.let { userData ->
+                                fullNameTextView.text = userData.username
+                                emailTextView.text = userData.email
+                                Log.d("UserData", "Username: ${userData.username}, Email: ${userData.email}")
+                            }
+                        }
+                        is Results.Error -> {
+                            Toast.makeText(context, result.error, Toast.LENGTH_SHORT).show()
+                        }
+                        is Results.Loading -> {
+                            // Handle loading state if needed
+                        }
+                    }
+                }
             }
-        }
 
-        // Set up click listeners
-        btnEdit.setOnClickListener { handleEditButtonClick() }
-        btnDeleteAccount.setOnClickListener { handleDeleteAccountButtonClick() }
-        btnLogout.setOnClickListener { handleLogoutButtonClick() }
+            btnEdit.setOnClickListener { handleEditButtonClick() }
+            btnDeleteAccount.setOnClickListener { handleDeleteAccountButtonClick(user.userId) }
+            btnLogout.setOnClickListener { handleLogoutButtonClick() }
+        }
     }
 
     private fun handleEditButtonClick() {
-        // Navigate to EditProfileActivity
         val intent = Intent(activity, EditProfileActivity::class.java)
         startActivity(intent)
     }
 
-    private fun handleDeleteAccountButtonClick() {
-        // Handle delete account button click (dummy functionality)
-        // You can add your logic here for deleting account
-    }
-
-    private fun handleLogoutButtonClick() {
-        // Tampilkan dialog konfirmasi
+    private fun handleDeleteAccountButtonClick(userId: String) {
         AlertDialog.Builder(requireContext())
             .setTitle("Confirmation")
-            .setMessage("Are you sure you want to logout?")
+            .setMessage("Are you sure you want to delete this account?")
             .setPositiveButton("Yes") { dialog, _ ->
-                // Hapus data pengguna yang masuk secara lokal
-                val sharedPref = activity?.getSharedPreferences("user_pref", Context.MODE_PRIVATE)
-                val editor = sharedPref?.edit()
-                editor?.clear()
-                editor?.apply()
+                viewLifecycleOwner.lifecycleScope.launch {
+                    when (profileViewModel.deleteUser(userId)) {
+                        is Results.Loading -> {
 
-                // Panggil fungsi untuk kembali ke halaman login
-                navigateToLogin()
+                        }
+                        is Results.Success -> {
+                            profileViewModel.logout()
+                        }
+                        is Results.Error -> {
+
+                        }
+                    }
+                }
                 dialog.dismiss()
             }
             .setNegativeButton("No") { dialog, _ ->
-                // Tutup dialog
                 dialog.dismiss()
             }
             .show()
     }
 
-    private fun navigateToLogin() {
-        // Intent untuk kembali ke halaman login
-        val intent = Intent(activity, LoginActivity::class.java)
-        // Tambahkan flag untuk membersihkan tumpukan aktivitas sehingga tidak bisa kembali ke ProfileFragment lagi
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        activity?.finish() // Selesaikan aktivitas saat kembali ke halaman login
+    private fun handleLogoutButtonClick() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Confirmation")
+            .setMessage("Are you sure you want to logout?")
+            .setPositiveButton("Yes") { dialog, _ ->
+                profileViewModel.logout()
+                dialog.dismiss()
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 }

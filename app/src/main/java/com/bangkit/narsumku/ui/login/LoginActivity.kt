@@ -133,7 +133,7 @@ class LoginActivity : AppCompatActivity() {
             setMessage(errorMessage)
             setPositiveButton("OKE") { _, _ ->
                 Log.d("LoginActivity", "User clicked OK on error dialog")
-                Toast.makeText(this@LoginActivity, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "There is an error occurred.", Toast.LENGTH_SHORT).show()
             }
             create()
             show()

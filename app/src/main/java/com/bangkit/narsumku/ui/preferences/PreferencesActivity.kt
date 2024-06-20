@@ -2,9 +2,6 @@ package com.bangkit.narsumku.ui.preferences
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -15,8 +12,6 @@ import com.bangkit.narsumku.data.Results
 import com.bangkit.narsumku.databinding.ActivityPreferencesBinding
 import com.bangkit.narsumku.ui.ViewModelFactory
 import com.bangkit.narsumku.ui.main.MainActivity
-import com.bangkit.narsumku.ui.welcome.WelcomeActivity
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class PreferencesActivity : AppCompatActivity() {
@@ -24,8 +19,6 @@ class PreferencesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPreferencesBinding
     private val preferencesViewModel: PreferencesViewModel by viewModels { ViewModelFactory.getInstance(this) }
     private var userId: String? = null
-    private val handler = Handler(Looper.getMainLooper())
-    private val checkInterval: Long = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,5 +1,6 @@
 package com.bangkit.narsumku.ui.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -21,6 +22,8 @@ class SearchAdapter(
 
     inner class SearchViewHolder(private val binding: ItemSpeakerBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        @SuppressLint("SetTextI18n")
         fun bind(speaker: Speaker) {
             Glide.with(binding.root.context)
                 .load(speaker.profilePicUrl)

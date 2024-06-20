@@ -20,7 +20,7 @@ class SignupViewModel(private val userRepository: UserRepository) : ViewModel() 
                 val result = userRepository.signup(name, email, password)
                 _registrationResult.postValue(result)
             } catch (e: Exception) {
-                _registrationResult.postValue(Results.Error("Terjadi kesalahan: ${e.message}"))
+                _registrationResult.postValue(Results.Error("There is an error occurred: ${e.message}"))
             }
         }
     }

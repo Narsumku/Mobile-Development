@@ -8,7 +8,9 @@ import com.bangkit.narsumku.data.request.SignupRequest
 import com.bangkit.narsumku.data.request.UpdateUserRequest
 import com.bangkit.narsumku.data.response.AddFavoriteResponse
 import com.bangkit.narsumku.data.response.DeleteFavoriteResponse
+import com.bangkit.narsumku.data.response.DeleteUserResponse
 import com.bangkit.narsumku.data.response.GetFavoriteResponse
+import com.bangkit.narsumku.data.response.GetUserResponse
 import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.response.PopularSpeaker
 import com.bangkit.narsumku.data.response.PreferencesResponse
@@ -18,6 +20,7 @@ import com.bangkit.narsumku.data.response.Speaker
 import com.bangkit.narsumku.data.response.SpeakerDetailResponse
 import com.bangkit.narsumku.data.response.UpdateUserResponse
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.HTTP
 import retrofit2.http.PATCH
@@ -81,4 +84,14 @@ interface ApiService {
         @Path("userId") userId: String,
         @Body preferencesRequest: PreferencesRequest
     ): PreferencesResponse
+
+    @GET("users/{userId}")
+    suspend fun getUser(
+        @Path("userId") userId: String
+    ): GetUserResponse
+
+    @DELETE("users/delete/{userId}")
+    suspend fun deleteUser(
+        @Path("userId") userId: String
+    ): DeleteUserResponse
 }

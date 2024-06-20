@@ -3,12 +3,12 @@ package com.bangkit.narsumku.ui.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bangkit.narsumku.R
 import com.bangkit.narsumku.data.Results
 import com.bangkit.narsumku.data.response.SpeakerDetailResponse
 import com.bangkit.narsumku.databinding.ActivitySpeakerDetailBinding
@@ -58,7 +58,7 @@ class SpeakerDetailActivity : AppCompatActivity() {
                     if (speaker.summary != null) {
                         binding.tvSummary.text = speaker.summary
                     } else {
-                        binding.tvSummary.text = "Summary for this speaker is not set yet"
+                        binding.tvSummary.text = getString(R.string.summary_not_set)
                     }
                     binding.tvRecent.text = speaker.recentExperience.toString()
                     binding.tvExperience.text = speaker.experience
@@ -92,7 +92,7 @@ class SpeakerDetailActivity : AppCompatActivity() {
                 Occupation: ${speaker.occupation}
                 Email: ${speaker.email}
                 Headline: ${speaker.headline}
-                Summary: ${speaker.summary ?: "Not set"}
+                Summary: ${speaker.summary}
                 Recent Experience: ${speaker.recentExperience}
                 Experience: ${speaker.experience}
                 Categories: ${
@@ -121,11 +121,6 @@ class SpeakerDetailActivity : AppCompatActivity() {
                         try {
                             val result = favoriteViewModel.addFavorite(user.userId, speakerId)
                             if (result is Results.Success && result.data.message == "Speaker is already a favorite for this user.") {
-                                // Jika speaker sudah menjadi favorit, hapus dari favorit
-                                Log.d(
-                                    "SpeakerDetailActivity",
-                                    "Speaker already a favorite, attempting to remove favorite"
-                                )
                                 favoriteViewModel.deleteFavorite(user.userId, speakerId)
                                 Toast.makeText(
                                     this@SpeakerDetailActivity,
@@ -133,17 +128,12 @@ class SpeakerDetailActivity : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                             } else if (result is Results.Success) {
-                                Log.d("SpeakerDetailActivity", "Successfully added to favorites")
                                 Toast.makeText(
                                     this@SpeakerDetailActivity,
                                     "Added to favorites",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             } else if (result is Results.Error) {
-                                Log.e(
-                                    "SpeakerDetailActivity",
-                                    "Failed to add favorite: ${result.error}"
-                                )
                                 Toast.makeText(
                                     this@SpeakerDetailActivity,
                                     "Failed to add favorite: ${result.error}",
@@ -151,11 +141,6 @@ class SpeakerDetailActivity : AppCompatActivity() {
                                 ).show()
                             }
                         } catch (e: Exception) {
-                            Log.e(
-                                "SpeakerDetailActivity",
-                                "Exception while adding/removing favorite",
-                                e
-                            )
                             Toast.makeText(
                                 this@SpeakerDetailActivity,
                                 "Failed to add/remove favorite",
@@ -165,7 +150,6 @@ class SpeakerDetailActivity : AppCompatActivity() {
                     }
                 }
             } else {
-                Log.w("SpeakerDetailActivity", "User not logged in")
                 Toast.makeText(this@SpeakerDetailActivity, "User not logged in", Toast.LENGTH_SHORT)
                     .show()
             }

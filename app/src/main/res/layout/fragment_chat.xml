@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:fontFamily="@font/leaguespartan"
-        android:text="Unlock this feature with a subscription"
+        android:text="@string/unlock_feature"
         android:textAlignment="center"
         android:textColor="@color/blue"
         android:textSize="16sp"

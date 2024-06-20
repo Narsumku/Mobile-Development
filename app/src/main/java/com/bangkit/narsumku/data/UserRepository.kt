@@ -11,8 +11,10 @@ import com.bangkit.narsumku.data.request.SignupRequest
 import com.bangkit.narsumku.data.request.UpdateUserRequest
 import com.bangkit.narsumku.data.response.AddFavoriteResponse
 import com.bangkit.narsumku.data.response.DeleteFavoriteResponse
+import com.bangkit.narsumku.data.response.DeleteUserResponse
 import com.bangkit.narsumku.data.response.ErrorResponse
 import com.bangkit.narsumku.data.response.GetFavoriteResponse
+import com.bangkit.narsumku.data.response.GetUserResponse
 import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.response.PopularSpeaker
 import com.bangkit.narsumku.data.response.PreferencesResponse
@@ -226,6 +228,34 @@ class UserRepository private constructor(
                 val updatedUserModel = userPreference.getSession().first().copy(fillPreferences = true)
                 saveSession(updatedUserModel)
             }
+            Results.Success(response)
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            Results.Error(errorMessage.toString())
+        } catch (e: Exception) {
+            Results.Error(e.localizedMessage ?: "Unknown error")
+        }
+    }
+
+    suspend fun getUser(userId: String): Results<GetUserResponse> {
+        return try {
+            val response = apiService.getUser(userId)
+            Results.Success(response)
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            Results.Error(errorMessage.toString())
+        } catch (e: Exception) {
+            Results.Error(e.localizedMessage ?: "Unknown error")
+        }
+    }
+
+    suspend fun deleteUser(userId: String): Results<DeleteUserResponse> {
+        return try {
+            val response = apiService.deleteUser(userId)
             Results.Success(response)
         } catch (e: HttpException) {
             val jsonInString = e.response()?.errorBody()?.string()

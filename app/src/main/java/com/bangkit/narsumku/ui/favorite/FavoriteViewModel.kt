@@ -22,15 +22,15 @@ class FavoriteViewModel(private val userRepository: UserRepository) : ViewModel(
 
     fun getFavorite(userId: String) {
         viewModelScope.launch {
-            _isLoading.value = true // Set status loading menjadi true
+            _isLoading.value = true
             userRepository.getFavorite(userId)
-                .catch { e ->
+                .catch {
                     _favorites.value = emptyList()
-                    _isLoading.value = false // Set status loading menjadi false setelah selesai
+                    _isLoading.value = false
                 }
                 .collect {
                     _favorites.value = it
-                    _isLoading.value = false // Set status loading menjadi false setelah selesai
+                    _isLoading.value = false
                 }
         }
     }

@@ -86,7 +86,8 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:layout_margin="16dp"
-                android:src="@drawable/ic_favorite" />
+                android:src="@drawable/ic_favorite"
+                android:contentDescription="@string/button_favorite" />
 
             <ImageView
                 android:id="@+id/btnShare"
@@ -94,7 +95,8 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:layout_margin="16dp"
-                android:src="@drawable/ic_share" />
+                android:src="@drawable/ic_share"
+                android:contentDescription="@string/button_share" />
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -124,7 +126,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="TextContrastCheck"
-                android:text="Headline" />
+                android:text="@string/headline" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -154,7 +156,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="TextContrastCheck"
-                android:text="Summary" />
+                android:text="@string/summary" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -182,7 +184,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TextContrastCheck"
-                android:text="Recent Experience:" />
+                android:text="@string/recent_experience" />
 
             <TextView
                 android:id="@+id/tvRecent"
@@ -198,7 +200,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvRecentHead"
                 tools:ignore="TextContrastCheck"
-                android:text="Recent Experience" />
+                android:text="@string/recent_experience_value" />
 
             <TextView
                 android:id="@+id/tvExperienceHead"
@@ -214,7 +216,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvRecent"
                 tools:ignore="TextContrastCheck"
-                android:text="Experience:" />
+                android:text="@string/experience" />
 
             <TextView
                 android:id="@+id/tvExperience"
@@ -232,7 +234,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tvExperienceHead"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="TextContrastCheck"
-                android:text="Experience"
+                android:text="@string/experience_value"
                 android:transitionName="speakerExperience" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -263,7 +265,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="TextContrastCheck"
-                android:text="Category:" />
+                android:text="@string/category" />
 
             <TextView
                 android:id="@+id/tvCategory"
@@ -281,7 +283,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tvCategoryHead"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:ignore="TextContrastCheck"
-                android:text="{$category1\n$category2\ncategory3}"
+                android:text="@string/category_value"
                 android:transitionName="speakerCategory" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
