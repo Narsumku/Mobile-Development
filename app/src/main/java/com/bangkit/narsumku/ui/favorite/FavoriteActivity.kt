@@ -40,6 +40,8 @@ class FavoriteActivity : AppCompatActivity() {
 
         viewModel.favorites.observe(this) { favorites ->
             adapter.updateItems(favorites)
+            binding.tvEmptyMessage.visibility = if (favorites.isEmpty()) View.VISIBLE else View.GONE
+            binding.recyclerViewSpeakers.visibility = if (favorites.isEmpty()) View.GONE else View.VISIBLE
         }
 
         viewModel.isLoading.asLiveData().observe(this) { isLoading ->
