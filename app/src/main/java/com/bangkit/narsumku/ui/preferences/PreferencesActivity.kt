@@ -40,14 +40,14 @@ class PreferencesActivity : AppCompatActivity() {
 
         binding.btnSetPreferences.setOnClickListener {
             userId?.let { id ->
-                val business = if (checkBoxBusiness.isChecked) "business" else ""
-                val entertainment = if (checkBoxEntertainment.isChecked) "entertainment" else ""
-                val politics = if (checkBoxPolitics.isChecked) "politics" else ""
-                val sport = if (checkBoxSport.isChecked) "sport" else ""
-                val tech = if (checkBoxTech.isChecked) "tech" else ""
-                val healthcare = if (checkBoxHealthcare.isChecked) "healthcare" else ""
-                val academic = if (checkBoxAcademic.isChecked) "academic" else ""
-                val media = if (checkBoxMedia.isChecked) "media" else ""
+                val business = if (checkBoxBusiness.isChecked) "Business" else ""
+                val entertainment = if (checkBoxEntertainment.isChecked) "Entertainment" else ""
+                val politics = if (checkBoxPolitics.isChecked) "Politics" else ""
+                val sport = if (checkBoxSport.isChecked) "Sport" else ""
+                val tech = if (checkBoxTech.isChecked) "Tech" else ""
+                val healthcare = if (checkBoxHealthcare.isChecked) "Healthcare" else ""
+                val academic = if (checkBoxAcademic.isChecked) "Academic" else ""
+                val media = if (checkBoxMedia.isChecked) "Media & News" else ""
 
                 lifecycleScope.launch {
                     val result = preferencesViewModel.setPreferences(
