@@ -12,8 +12,8 @@ class HomeViewModel(private val userRepository: UserRepository) : ViewModel() {
         return userRepository.getHomeForPopular()
     }
 
-    suspend fun getHomeForRecommendation(): Results<List<RecommendationSpeakerResponse>> {
-        return userRepository.getHomeForRecommendation()
+    suspend fun getHomeForRecommendation(userId: String): Results<List<RecommendationSpeakerResponse>> {
+        return userRepository.getHomeForRecommendation(userId)
     }
 
     fun getUserSession() = userRepository.getSession().asLiveData()

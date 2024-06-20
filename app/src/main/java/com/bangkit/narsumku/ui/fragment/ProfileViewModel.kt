@@ -1,13 +1,10 @@
 package com.bangkit.narsumku.ui.fragment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import com.bangkit.narsumku.data.UserRepository
 
-class ProfileViewModel : ViewModel() {
+class ProfileViewModel(private val userRepository: UserRepository) : ViewModel()  {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is profile Fragment"
-    }
-    val text: LiveData<String> = _text
+    fun getUserSession() = userRepository.getSession().asLiveData()
 }

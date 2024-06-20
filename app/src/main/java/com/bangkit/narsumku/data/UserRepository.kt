@@ -6,21 +6,26 @@ import com.bangkit.narsumku.data.pref.UserPreference
 import com.bangkit.narsumku.data.request.AddFavoriteRequest
 import com.bangkit.narsumku.data.request.DeleteFavoriteRequest
 import com.bangkit.narsumku.data.request.LoginRequest
+import com.bangkit.narsumku.data.request.PreferencesRequest
 import com.bangkit.narsumku.data.request.SignupRequest
+import com.bangkit.narsumku.data.request.UpdateUserRequest
 import com.bangkit.narsumku.data.response.AddFavoriteResponse
 import com.bangkit.narsumku.data.response.DeleteFavoriteResponse
 import com.bangkit.narsumku.data.response.ErrorResponse
 import com.bangkit.narsumku.data.response.GetFavoriteResponse
 import com.bangkit.narsumku.data.response.LoginResponse
 import com.bangkit.narsumku.data.response.PopularSpeaker
+import com.bangkit.narsumku.data.response.PreferencesResponse
 import com.bangkit.narsumku.data.response.RecommendationSpeakerResponse
 import com.bangkit.narsumku.data.response.SignupResponse
 import com.bangkit.narsumku.data.response.Speaker
 import com.bangkit.narsumku.data.response.SpeakerDetailResponse
+import com.bangkit.narsumku.data.response.UpdateUserResponse
 import com.bangkit.narsumku.data.retrofit.ApiConfig
 import com.bangkit.narsumku.data.retrofit.ApiService
 import com.google.gson.Gson
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import retrofit2.HttpException
 
@@ -74,7 +79,8 @@ class UserRepository private constructor(
                         username = it.username,
                         userId = it.userId,
                         token = it.token,
-                        isLogin = true
+                        isLogin = true,
+                        fillPreferences = it.fillPreferences
                     )
                 }
                 if (session != null) {
@@ -131,9 +137,9 @@ class UserRepository private constructor(
         }
     }
 
-    suspend fun getHomeForRecommendation(): Results<List<RecommendationSpeakerResponse>> {
+    suspend fun getHomeForRecommendation(userId: String): Results<List<RecommendationSpeakerResponse>> {
         return try {
-            val response = apiService.getHomeForRecommendation()
+            val response = apiService.getHomeForRecommendation(userId)
             Log.d("UserRepository", "Home Response: ${Gson().toJson(response)}")
             Results.Success(response)
         } catch (e: HttpException) {
@@ -192,6 +198,42 @@ class UserRepository private constructor(
         } catch (e: Exception) {
             Log.e("UserRepository", "Exception: ${e.localizedMessage}")
             flowOf(emptyList())
+        }
+    }
+
+    suspend fun updateUser(userId: String, username: String, email: String, password: String): Results<UpdateUserResponse> {
+        return try {
+            val client = UpdateUserRequest(username, email, password)
+            val response = apiService.updateUser(userId, client)
+            Results.Success(response)
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            Results.Error(errorMessage.toString())
+        } catch (e: Exception) {
+            Results.Error(e.localizedMessage ?: "Unknown error")
+        }
+    }
+
+    suspend fun setPreferences(
+        userId: String,
+        preferencesRequest: PreferencesRequest
+    ): Results<PreferencesResponse> {
+        return try {
+            val response = apiService.setPreferences(userId, preferencesRequest)
+            if (response.message == "Preferences submitted successfully.") {
+                val updatedUserModel = userPreference.getSession().first().copy(fillPreferences = true)
+                saveSession(updatedUserModel)
+            }
+            Results.Success(response)
+        } catch (e: HttpException) {
+            val jsonInString = e.response()?.errorBody()?.string()
+            val errorBody = Gson().fromJson(jsonInString, ErrorResponse::class.java)
+            val errorMessage = errorBody.message
+            Results.Error(errorMessage.toString())
+        } catch (e: Exception) {
+            Results.Error(e.localizedMessage ?: "Unknown error")
         }
     }
 

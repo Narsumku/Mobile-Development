@@ -37,12 +37,14 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             observePopularResponse()
-            observeRecommendationResponse()
         }
 
         homeViewModel.getUserSession().observe(viewLifecycleOwner) { user ->
             if (user.isLogin) {
                 binding.tvUsername.text = user.username
+                lifecycleScope.launch {
+                    observeRecommendationResponse(user.userId)
+                }
             }
         }
         setupRecyclerViews()
@@ -91,8 +93,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private suspend fun observeRecommendationResponse() {
-        when (val recommendation = homeViewModel.getHomeForRecommendation()) {
+    private suspend fun observeRecommendationResponse(userId: String) {
+        when (val recommendation = homeViewModel.getHomeForRecommendation(userId)) {
             is Results.Loading -> {
                 Log.d("SearchActivity", "Loading data...") // Log loading state
                 binding.progressBar.visibility = View.VISIBLE

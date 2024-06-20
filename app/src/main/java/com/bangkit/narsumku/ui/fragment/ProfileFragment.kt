@@ -10,8 +10,16 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.bangkit.narsumku.R
+import com.bangkit.narsumku.data.UserRepository
+import com.bangkit.narsumku.data.pref.UserPreference
+import com.bangkit.narsumku.data.pref.dataStore
+import com.bangkit.narsumku.data.retrofit.ApiConfig
+import com.bangkit.narsumku.ui.ViewModelFactory
 import com.bangkit.narsumku.ui.login.LoginActivity
+import com.bangkit.narsumku.ui.profile.EditProfileActivity
 
 class ProfileFragment : Fragment() {
 
@@ -20,6 +28,10 @@ class ProfileFragment : Fragment() {
     private lateinit var btnEdit: Button
     private lateinit var btnDeleteAccount: Button
     private lateinit var btnLogout: Button
+
+    private val profileViewModel: ProfileViewModel by viewModels<ProfileViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,9 +50,13 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Set dummy data for demonstration purposes
-        fullNameEditText.text = "John Doe"
-        emailEditText.text = "johndoe@example.com"
+        // Observe user session
+        profileViewModel.getUserSession().observe(viewLifecycleOwner) { user ->
+            if (user != null) {
+                fullNameEditText.text = user.username
+                emailEditText.text = user.email
+            }
+        }
 
         // Set up click listeners
         btnEdit.setOnClickListener { handleEditButtonClick() }
@@ -49,8 +65,9 @@ class ProfileFragment : Fragment() {
     }
 
     private fun handleEditButtonClick() {
-        // Handle edit button click (dummy functionality)
-        // You can add your logic here for editing profile
+        // Navigate to EditProfileActivity
+        val intent = Intent(activity, EditProfileActivity::class.java)
+        startActivity(intent)
     }
 
     private fun handleDeleteAccountButtonClick() {

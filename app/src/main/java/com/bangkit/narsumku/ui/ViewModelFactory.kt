@@ -8,8 +8,11 @@ import com.bangkit.narsumku.di.Injection
 import com.bangkit.narsumku.ui.detail.SpeakerDetailViewModel
 import com.bangkit.narsumku.ui.favorite.FavoriteViewModel
 import com.bangkit.narsumku.ui.fragment.HomeViewModel
+import com.bangkit.narsumku.ui.fragment.ProfileViewModel
 import com.bangkit.narsumku.ui.login.LoginViewModel
 import com.bangkit.narsumku.ui.main.MainViewModel
+import com.bangkit.narsumku.ui.preferences.PreferencesViewModel
+import com.bangkit.narsumku.ui.profile.EditProfileViewModel
 import com.bangkit.narsumku.ui.search.SearchViewModel
 import com.bangkit.narsumku.ui.signup.SignupViewModel
 
@@ -19,6 +22,18 @@ class ViewModelFactory(private val repository: UserRepository) :
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
+            modelClass.isAssignableFrom(PreferencesViewModel::class.java) -> {
+                PreferencesViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                ProfileViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(EditProfileViewModel::class.java) -> {
+                EditProfileViewModel(repository) as T
+            }
+
             modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
                 FavoriteViewModel(repository) as T
             }
