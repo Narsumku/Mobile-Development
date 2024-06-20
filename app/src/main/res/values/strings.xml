@@ -64,8 +64,8 @@
     <string name="button_share">Button Share</string>
     <string name="headline">Headline</string>
     <string name="summary">Summary</string>
-    <string name="recent_experience">Recent Experience:</string>
-    <string name="recent_experience_value">Recent Experience</string>
+    <string name="recent_experience">Experienced in the field for:</string>
+    <string name="recent_experience_value">\?\?\? Years</string>
     <string name="experience">Experience:</string>
     <string name="experience_value">Experience</string>
     <string name="category">Category:</string>

@@ -1,5 +1,6 @@
 package com.bangkit.narsumku.ui.detail
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -27,6 +28,7 @@ class SpeakerDetailActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySpeakerDetailBinding.inflate(layoutInflater)
@@ -40,12 +42,10 @@ class SpeakerDetailActivity : AppCompatActivity() {
         viewModel.speakerDetail.observe(this) { result ->
             when (result) {
                 is Results.Loading -> {
-                    // Tampilkan loading
                     binding.progressBar.visibility = View.VISIBLE
                 }
 
                 is Results.Success -> {
-                    // Tampilkan data speaker
                     val speaker = result.data
                     binding.progressBar.visibility = View.GONE
                     Glide.with(binding.root.context)
@@ -55,13 +55,23 @@ class SpeakerDetailActivity : AppCompatActivity() {
                     binding.tvOccupation.text = speaker.occupation
                     binding.tvEmail.text = speaker.email
                     binding.tvHeadline.text = speaker.headline
+
                     if (speaker.summary != null) {
                         binding.tvSummary.text = speaker.summary
                     } else {
                         binding.tvSummary.text = getString(R.string.summary_not_set)
                     }
-                    binding.tvRecent.text = speaker.recentExperience.toString()
+
+                    val yearExperience = if (speaker.recentExperience > 1) {
+                        " Years"
+                    } else {
+                        " Year"
+                    }
+
+                    val numberExperience = speaker.recentExperience.toString()
+                    binding.tvRecent.text = numberExperience + yearExperience
                     binding.tvExperience.text = speaker.experience
+
                     val category1 = speaker.category1
                     val category2 = speaker.category2
                     val category3 = speaker.category3
@@ -74,7 +84,6 @@ class SpeakerDetailActivity : AppCompatActivity() {
                 }
 
                 is Results.Error -> {
-                    // Tampilkan pesan error
                     binding.progressBar.visibility = View.GONE
                 }
             }
